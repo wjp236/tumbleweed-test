@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TemplateSMS>
+    <templateContent1>1234567890</templateContent1>
+    <templateContent2>1234567890</templateContent2>
+    <templateContent3>1234567890</templateContent3>
+    <templateContent4>1234567890</templateContent4>
+    <templateContent5>1234567890</templateContent5>
+    <templateContent6>1234567890</templateContent6>
+    <templateContent7>1234567890</templateContent7>
+    <templateContent8>1234567890</templateContent8>
+    <templateContent9>1234567890</templateContent9>
+    <templateContent10>1234567890</templateContent10>
+    <templateContent11>http://120.27.35.30/index.php?m=activity&amp;c=charge_flow&amp;a=FlowNotify</templateContent11>
+</TemplateSMS>

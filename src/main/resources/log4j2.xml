@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="error">
+    <Properties>
+        <Property name="log_home">/Users/mylover/Workspaces/log/restTest</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss,SSS} [%p] %c{1}%x - %m%n"/>
+        </Console>
+
+        <RollingRandomAccessFile name="cloudcom" fileName="${log_home}/cloudcom.log"
+                                 filePattern="${log_home}/cloudcom.log.%-d{yyyy-MM-dd-HH}">
+            <PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss,SSS} %x - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="20" modulate="false"/>
+            </Policies>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="clouderror" fileName="${log_home}/clouderror.log"
+                                 filePattern="${log_home}/clouderror.log.%-d{yyyy-MM-dd}">
+            <ThresholdFilter level="error" onMatch="ACCEPT"/>
+            <PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss,SSS} %x - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="cloudcom"/>
+            <AppenderRef ref="clouderror"/>
+        </Root>
+    </Loggers>
+</Configuration>
