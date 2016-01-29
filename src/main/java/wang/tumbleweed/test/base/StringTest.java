@@ -22,10 +22,10 @@ public class StringTest {
     public Logger log = LogManager.getLogger(StringTest.class);
 
     @Test
-    public void test4() {
-        for (long i = 800000001; i < 800000301;i++){
-            System.out.println("<mobile>"+i+"</mobile>");
-        }
+    public void test4() throws NoSuchAlgorithmException {
+        String sig = "_";
+        sig = MD5.md5(sig);
+        log.info(sig);
     }
 
     @Test

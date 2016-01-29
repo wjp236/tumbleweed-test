@@ -219,4 +219,90 @@ public class PartnerTest {
 
         HttpPostUtil.sendXML(mainAccount, token, url, body);
     }
+
+
+    /**
+     *创建路由
+     * @throws java.io.IOException
+     * @throws java.security.NoSuchAlgorithmException
+     * @throws ClientProtocolException
+     */
+    @SuppressWarnings("static-access")
+    @Test
+    public void createRoute() throws NoSuchAlgorithmException, IOException {
+        Document document = DocumentHelper.createDocument();
+        Element root = document.addElement("Request");
+
+        root.addElement("caller").addText("8000000001");
+        root.addElement("called").addText("8000000002");
+        root.addElement("appId").addText("4028efe33fc65b56013fc660001f0002");
+        root.addElement("asrurl").addText("http://0.0.0.0");
+        String body = document.asXML();
+
+        String mainAccount = "4028efe33fc65b56013fc65be7cc0000";
+        String token = "5091250ed5154c31ab286664eed13043";
+
+        String url = "http://localhost:8080/2013-12-26/Accounts/"+mainAccount+"/CommitRoute";// 本地
+
+        HttpPostUtil HttpPostUtil = new HttpPostUtil();
+
+        HttpPostUtil.sendXML(mainAccount, token, url, body);
+    }
+
+
+    /**
+     *创建路由
+     * @throws java.io.IOException
+     * @throws java.security.NoSuchAlgorithmException
+     * @throws ClientProtocolException
+     */
+    @SuppressWarnings("static-access")
+    @Test
+    public void updateRoute() throws NoSuchAlgorithmException, IOException {
+        Document document = DocumentHelper.createDocument();
+        Element root = document.addElement("Request");
+
+        root.addElement("caller").addText("8000000001");
+        root.addElement("called").addText("8000000002");
+        root.addElement("appId").addText("4028efe33fc65b56013fc660001f0002");
+        root.addElement("asrurl").addText("http://1.1.1.1");
+        String body = document.asXML();
+
+        String mainAccount = "4028efe33fc65b56013fc65be7cc0000";
+        String token = "5091250ed5154c31ab286664eed13043";
+
+        String url = "http://localhost:8080/2013-12-26/Accounts/"+mainAccount+"/ModifyRoute";// 本地
+
+        HttpPostUtil HttpPostUtil = new HttpPostUtil();
+
+        HttpPostUtil.sendXML(mainAccount, token, url, body);
+    }
+
+    /**
+     *创建路由
+     * @throws java.io.IOException
+     * @throws java.security.NoSuchAlgorithmException
+     * @throws ClientProtocolException
+     */
+    @SuppressWarnings("static-access")
+    @Test
+    public void RemoveRoute() throws NoSuchAlgorithmException, IOException {
+        Document document = DocumentHelper.createDocument();
+        Element root = document.addElement("Request");
+
+        root.addElement("caller").addText("8000000001");
+        root.addElement("called").addText("8000000002");
+        root.addElement("appId").addText("4028efe33fc65b56013fc660001f0002");
+        root.addElement("asrurl").addText("http://1.1.1.1");
+        String body = document.asXML();
+
+        String mainAccount = "4028efe33fc65b56013fc65be7cc0000";
+        String token = "5091250ed5154c31ab286664eed13043";
+
+        String url = "http://localhost:8080/2013-12-26/Accounts/"+mainAccount+"/RemoveRoute";// 本地
+
+        HttpPostUtil HttpPostUtil = new HttpPostUtil();
+
+        HttpPostUtil.sendXML(mainAccount, token, url, body);
+    }
 }

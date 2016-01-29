@@ -510,4 +510,15 @@ public class XmlTest {
 //        ServerAddrs serverAddrs = (ServerAddrs) JSONObject.toBean(jsonObject, ServerAddrs.class, classMap);
 
     }
+
+    @Test
+    public void test2() throws JAXBException {
+        String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><head><statuscode>000000</statuscode><CallBack><callSid>160118095653624700010095002aa319</callSid><dateCreated>2016-01-18 09:56:53</dateCreated></CallBack></head></Response>";
+        JAXBContext context = JAXBContext.newInstance(XmlModel.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        XmlModel xmlModel = (XmlModel)unmarshaller.unmarshal(new StringReader(xml));
+        System.out.println(xmlModel.getHead().getStatuscode());
+        System.out.println(xmlModel.getHead().getCallBack().getCallSid());
+
+    }
 }

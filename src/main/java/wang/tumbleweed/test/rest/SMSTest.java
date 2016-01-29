@@ -206,6 +206,46 @@ public class SMSTest implements Runnable {
     }
 
     @Test
+    public void querySmsArrive() throws IOException, NoSuchAlgorithmException {
+
+        Document document = DocumentHelper.createDocument();
+        Element root = document.addElement("SMSArrived");
+        root.addElement("appId").addText("4028efe33fc65b56013fc660001f0002");
+        root.addElement("count").addText("300");
+
+        String body = document.asXML();
+
+        String mainAccout = "4028efe33fc65b56013fc65be7cc0000";
+
+        String token = "5091250ed5154c31ab286664eed13043";
+
+        String url = "http://localhost:8080/2013-12-26/Accounts/" + mainAccout + "/SMS/GetArrived";
+
+        returnTT(mainAccout, token, url, body);
+    }
+
+
+    @Test
+    public void querySmsArriveJson() throws IOException, NoSuchAlgorithmException {
+
+        JSONObject json = new JSONObject();
+        // 必选
+        json.put("appId", "4028efe33fc65b56013fc660001f0002");
+        json.put("count", "300");
+        log.info(json.toString());
+
+        String mainAccout = "4028efe33fc65b56013fc65be7cc0000";
+
+        String token = "5091250ed5154c31ab286664eed13043";
+
+        String url = "http://localhost:8080/2013-12-26/Accounts/" + mainAccout + "/SMS/GetArrived";
+
+
+        HttpPostUtil.sendJSON(mainAccout, token, url, json.toString());
+    }
+
+
+    @Test
     public void querySmsjson() throws IOException, NoSuchAlgorithmException {
         JSONObject json = new JSONObject();
         // 必选

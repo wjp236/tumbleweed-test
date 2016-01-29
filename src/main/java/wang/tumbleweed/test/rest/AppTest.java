@@ -137,4 +137,25 @@ public class AppTest {
     }
 
 
+    // 私有云应用
+    @Test
+    public void loadApp() throws NoSuchAlgorithmException, IOException {
+        Document document = DocumentHelper.createDocument();
+        Element root = document.addElement("Request");
+        root.addElement("appId").addText("4028efe33fc65b56013fc660001f0002");
+
+        String body = document.asXML();
+
+        String accountSid = "4028efe33fc65b56013fc65be7cc0000";
+        String token = "5091250ed5154c31ab286664eed13043";
+
+        String url = "http://localhost:8080/2013-12-26/Accounts/"+accountSid+"/LoadAppStatus";
+
+        HttpPostUtil HttpPostUtil = new HttpPostUtil();
+
+        String s = HttpPostUtil.sendXML(accountSid, token, url, body);
+
+        log.info(s);
+    }
+
 }

@@ -1,6 +1,14 @@
 package wang.tumbleweed.test.rest;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.dom4j.Document;
@@ -8,10 +16,16 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.json.JSONObject;
 import org.junit.Test;
+import wang.tumbleweed.common.Base64;
 import wang.tumbleweed.common.HttpPostUtil;
+import wang.tumbleweed.common.MD5;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by mylover on 8/11/15.
@@ -191,6 +205,82 @@ public class CallTest implements Runnable {
         log.info(s);
     }
 
+
+    // 营销外呼 callState
+    @SuppressWarnings("static-access")
+    @Test
+    public void LandingCallsState() throws ClientProtocolException,
+            NoSuchAlgorithmException, IOException {
+        Document document = DocumentHelper.createDocument();
+        Element root = document.addElement("LandingCall");
+
+        root.addElement("callSid").addText("16012615042692190001000400004668");
+        root.addElement("action").addText("SellingCall");
+        root.addElement("number").addText("'18210198380‘");
+        root.addElement("state").addText("1");
+        root.addElement("duration").addText("2");
+        root.addElement("userData").addText("3");
+
+        String body = document.asXML();
+        String mainAccount = "4028efe33fc65b56013fc65be7cc0000";
+        String token = "5091250ed5154c31ab286664eed13043";
+        String url = "http://localhost:8080/2013-12-26/inner/Calls/LandingCall/CallState";
+
+        returnTT(mainAccount, token, url, body);
+
+    }
+
+    /**
+     * ccpuserdata
+     *
+     * @return
+     */
+    public String getCcpUserdate() {
+        net.sf.json.JSONObject json= new net.sf.json.JSONObject();
+        json.put("respUrl", "http://192.168.21.56:8881/ivr/xiaomi/success.do");
+        json.put("cbContentType","xml");
+        json.put("appId", "ff808081517a924601517af966a10000");
+        log.info("ccpuserdata: {}", json.toString());
+        String ccpUserData = "";
+        try {
+            ccpUserData = URLEncoder.encode(json.toString(), "utf-8");
+            ccpUserData = URLEncoder.encode(ccpUserData, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            log.error(e);
+        }
+        return ccpUserData;
+    }
+
+
+    public void returnTT(String mainAccout, String token, String url,
+                         String body) throws NoSuchAlgorithmException, IOException {
+        String curr_date = new SimpleDateFormat("yyyyMMddHHmmss")
+                .format(new Date());
+        String sig = mainAccout + token + curr_date;
+        sig = MD5.md5(sig);
+        log.info(sig);
+        String authorization = mainAccout + ":" + curr_date;
+        authorization = Base64.encodeToString(authorization);
+        String httpurl = url + "?ccpuserdata=" + getCcpUserdate();
+
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost(httpurl);
+        httppost.setHeader("Content-Type", "application/xml;charset=utf-8");
+        httppost.setHeader("Accept", "application/xml");
+        httppost.setHeader("Authorization", authorization);
+
+        HttpEntity entity = new StringEntity(body, "UTF-8");
+        httppost.setEntity(entity);
+
+        HttpResponse httpresponse = httpclient.execute(httppost);
+        String conResult = EntityUtils.toString(httpresponse.getEntity(), "UTF-8");
+        StatusLine statusLine = httpresponse.getStatusLine();
+        int status = statusLine.getStatusCode();
+
+        log.info("状态:" + status + ";\n返回包体:" + conResult);
+
+    }
+
     @SuppressWarnings("static-access")
     @Test
     public void LandingCallsNew() throws ClientProtocolException,
@@ -308,14 +398,14 @@ public class CallTest implements Runnable {
         Document document = DocumentHelper.createDocument();
         Element root = document.addElement("Request");
 
-        root.addElement("action").addText("");
+        root.addElement("action").addText("voiceCapctha");
         root.addElement("callId").addText("15061216590396940001000200000001");
         root.addElement("number").addText("18600200156");
-        root.addElement("answertime").addText("12");// 应答时间yyyymmddhhmmss
+//        root.addElement("answertime").addText("12");// 应答时间yyyymmddhhmmss
 
-        root.addElement("status").addText("0");// 外呼状态（ 0 正常通话 1 被叫未应答 2 外呼失败）
+        root.addElement("status").addText("1");// 外呼状态（ 0 正常通话 1 被叫未应答 2 外呼失败）
         root.addElement("endtime").addText("1501130830415011308304");// 结束时间yyyymmddhhmmss
-        root.addElement("startcalltime").addText("");// 开始呼叫时间yyyymmddhhmmss
+        root.addElement("startcalltime").addText("yyyymmddhhmmss");// 开始呼叫时间yyyymmddhhmmss
         root.addElement("userData").addText("userData");// 用户私有数据。和语音验证码接口的私有数据一致
         root.addElement("hisuncallId").addText("");// 用户私有数据。和语音验证码接口的私有数据一致
         String body = document.asXML();
@@ -323,7 +413,7 @@ public class CallTest implements Runnable {
         String mainAccount = "4028efe33fc65b56013fc65be7cc0000";
         String token = "5091250ed5154c31ab286664eed13043";
 
-        String url = "http://192.168.178.219:8080/2013-12-26/Calls/voiceCapctha";// 本地
+        String url = "http://localhost:8080/2013-12-26/Calls/voiceCapctha";// 本地
 
         // String url =
         // "http://118.194.243.239:8881/2013-12-26/Calls/voiceCapctha";//外网
