@@ -35,7 +35,7 @@ public class Test {
 
         String token = "ff7e65d6dfec46cfbf3cf21abdd096d7";
 
-        String url = "http://192.168.177.108:8080/2013-12-26/inter/test";
+        String url = "http://192.168.178.219:8080/2013-12-26/inter/Test/test";
         for (int i = 0; i < 1; i++) {
 //        for (int i = 0; i < 100000000; i++) {
             returnTT(mainAccout, token, url, body);

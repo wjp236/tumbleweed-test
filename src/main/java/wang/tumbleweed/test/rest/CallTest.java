@@ -401,13 +401,14 @@ public class CallTest implements Runnable {
         root.addElement("action").addText("voiceCapctha");
         root.addElement("callId").addText("15061216590396940001000200000001");
         root.addElement("number").addText("18600200156");
-//        root.addElement("answertime").addText("12");// 应答时间yyyymmddhhmmss
-
+        root.addElement("answertime").addText("12");// 应答时间yyyymmddhhmmss
         root.addElement("status").addText("1");// 外呼状态（ 0 正常通话 1 被叫未应答 2 外呼失败）
         root.addElement("endtime").addText("1501130830415011308304");// 结束时间yyyymmddhhmmss
         root.addElement("startcalltime").addText("yyyymmddhhmmss");// 开始呼叫时间yyyymmddhhmmss
         root.addElement("userData").addText("userData");// 用户私有数据。和语音验证码接口的私有数据一致
-        root.addElement("hisuncallId").addText("");// 用户私有数据。和语音验证码接口的私有数据一致
+        root.addElement("hisuncallId").addText("11111");// 用户私有数据。和语音验证码接口的私有数据一致
+        root.addElement("calltime").addText("1");
+        root.addElement("alertingtime").addText("1");
         String body = document.asXML();
 
         String mainAccount = "4028efe33fc65b56013fc65be7cc0000";
@@ -423,6 +424,49 @@ public class CallTest implements Runnable {
         HttpPostUtil HttpPostUtil = new HttpPostUtil();
 
         String s = HttpPostUtil.sendXML(mainAccount, token, url, body);
+        System.err.println("----url---" + url);
+        System.err.println("----wjp---" + s);
+    }
+
+    /**
+     * 验证码被叫摘机
+     *
+     * @throws java.io.IOException
+     * @throws java.security.NoSuchAlgorithmException
+     * @throws ClientProtocolException
+     */
+    @SuppressWarnings("static-access")
+    @Test
+    public void voiceVerifyDoneJson() throws ClientProtocolException,
+            NoSuchAlgorithmException, IOException {
+
+        JSONObject json = new JSONObject();
+        // 必选
+        json.put("action", "voiceCapctha");
+        json.put("callId", "15061216590396940001000200000001");
+        json.put("number", "186002001562");
+
+        // 可选
+        json.put("status", "2");
+        json.put("endtime", "http://192.168.178.219:8080/ivrDialVoice/wjp");
+        json.put("startcalltime", "01057234444");
+        json.put("userData", "Wel.wav;a.wav");
+        json.put("hisuncallId", "Wel.wav;a.wav");
+        String body = json.toString();
+
+        String mainAccount = "4028efe33fc65b56013fc65be7cc0000";
+        String token = "5091250ed5154c31ab286664eed13043";
+
+        String url = "http://localhost:8080/2013-12-26/Calls/voiceCapctha";// 本地
+
+        // String url =
+        // "http://118.194.243.239:8881/2013-12-26/Calls/voiceCapctha";//外网
+
+        // String url =
+        // "http://192.168.21.56:8881/2013-12-26/Calls/voiceCapctha";//开发环境
+        HttpPostUtil HttpPostUtil = new HttpPostUtil();
+
+        String s = HttpPostUtil.sendJSON(mainAccount, token, url, body);
         System.err.println("----url---" + url);
         System.err.println("----wjp---" + s);
     }
