@@ -36,9 +36,9 @@ public class HttpPostUtil {
         StatusLine statusLine = httpresponse.getStatusLine();
         int status = statusLine.getStatusCode();
 
-        logger.info("状态:" + status + ";返回包体:" + conResult);
+        logger.info("状态:" + status + ";返回包体:\n\n" + conResult + "\n\n");
 
-        return "status=" + status + ";conResult=" + conResult;
+        return conResult;
 
     }
 
