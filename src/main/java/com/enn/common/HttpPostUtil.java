@@ -42,4 +42,23 @@ public class HttpPostUtil {
 
     }
 
+
+    public static String sendXml(String url, String body)
+            throws IOException, NoSuchAlgorithmException {
+
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost(url);
+        HttpEntity entity = new StringEntity(body, "UTF-8");
+        httppost.setEntity(entity);
+        HttpResponse httpresponse = httpclient.execute(httppost);
+        String conResult = EntityUtils.toString(httpresponse.getEntity());
+        StatusLine statusLine = httpresponse.getStatusLine();
+        int status = statusLine.getStatusCode();
+
+        logger.info("状态:" + status + ";返回包体:\n\n" + conResult + "\n\n");
+
+        return conResult;
+
+    }
+
 }

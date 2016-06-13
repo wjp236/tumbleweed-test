@@ -278,8 +278,21 @@ public class StringTest {
 
     @Test
     public void test6() throws NoSuchAlgorithmException {
-        String pwd = "123456";
-        log.info(MD5.md5(pwd));
+
+        int i = 19%7;
+        log.info(i);
+        String type = "2";
+        switch (type) {
+            case "1" :{
+                log.info("1");
+            }
+            case "2" :{
+                log.info("2");
+            }
+            default: {
+                log.info("default");
+            }
+        }
     }
 
 }
