@@ -75,4 +75,5 @@ public class Test {
         int status = statusLine.getStatusCode();
         log.info("状态:" + status + ";\n返回包体:" + conResult);
     }
+
 }

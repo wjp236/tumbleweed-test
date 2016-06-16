@@ -67,7 +67,8 @@ public class WebCashEcejTest {
         json.put("biz_type", "GOODS");
         json.put("trade_amt", "1.0");
         json.put("trade_desc", "篮球");
-        json.put("req_time", "20160426163043");
+        json.put("req_time", "20160618093120");
+        json.put("time_expire", "20160618103120");
         json.put("trade_mode", "GUARANTEEPAY");
         json.put("trade_detail", "秘制篮球");
         json.put("currency", "CNY");
@@ -75,14 +76,14 @@ public class WebCashEcejTest {
         json.put("merc_order_no", "00001");
         json.put("attach", "userdata");
         json.put("receive_no", "1234567890");
-        json.put("notify_url", "http://localhost:8080");
+        json.put("notify_url", "http://10.37.148.254:9022/webCash-core/webCash/xinyi/make/metCallBack");
         json.put("pay_type", "APP");
-        json.put("cashAmt", "0.0");
-        json.put("priAmt", "0.0");
-        json.put("packAmt", "0.0");
+        json.put("cashAmt", "3.0");
+        json.put("priAmt", "2.0");
+        json.put("packAmt", "1.0");
         String body = json.toString();
         log.info(body);
-        String urlsignature = localServerUrl + "/xinyi/make/signature";
+        String urlsignature = serverUrl + "/xinyi/make/signature";
         String requestBody = HttpPostUtil.sendJSON(urlsignature, body);
 
         String url = localServerUrl + "/pay/unifiedOrder";
@@ -98,7 +99,7 @@ public class WebCashEcejTest {
         JSONObject json = new JSONObject();
         json.put("salt","123456");
         json.put("merc_id", "8011056811254598983686");
-        json.put("trade_no", "124201606091523150846010024576");
+        json.put("trade_no", "124201606131841320695010024576");
         json.put("req_time","20160428105935");
         json.put("appid", "A000003");
         json.put("tradeChannel", "CUP");
@@ -118,9 +119,20 @@ public class WebCashEcejTest {
     @Test
     public void callBack() throws IOException, NoSuchAlgorithmException {
 
-        String url = localServerUrl + "/pay/callBack/WX";
+        String url = localServerUrl + "/pay/callBack/ZFB";
 
         HttpPostUtil.sendXml(url, "test");
+    }
+
+    /**
+     * 回调接口
+     */
+    @Test
+    public void metCallBack() throws IOException, NoSuchAlgorithmException {
+
+        String url = localServerUrl + "/xinyi/make/metCallBack";
+
+        HttpPostUtil.sendJSON(url, "");
     }
 
 
