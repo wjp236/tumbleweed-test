@@ -12,8 +12,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -26,20 +24,16 @@ public class Test {
 
     @org.junit.Test
     public void test() throws NoSuchAlgorithmException, IOException {
-
-        Document document = DocumentHelper.createDocument();
-
-        String body = document.asXML();
-
-        String mainAccout = "4028eb25444d379701444d426e640001";
-
-        String token = "ff7e65d6dfec46cfbf3cf21abdd096d7";
-
-        String url = "http://192.168.178.219:8080/2013-12-26/inter/Test/test2";
-        for (int i = 0; i < 1; i++) {
-//        for (int i = 0; i < 100000000; i++) {
-            returnTT(mainAccout, token, url, body);
+        String test = null;
+        long t1 = System.currentTimeMillis();
+        log.info("t1:{}", t1);
+        for (long i = 0; i < 100000; i++) {
+            if (1 == 1) {
+               log.info(i);
+            }
+//             test += i;
         }
+        log.info(System.currentTimeMillis() - t1);
     }
 
     @org.junit.Test
@@ -81,4 +75,5 @@ public class Test {
         int status = statusLine.getStatusCode();
         log.info("状态:" + status + ";\n返回包体:" + conResult);
     }
+
 }

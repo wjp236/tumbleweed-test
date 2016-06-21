@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 public class ExceptionHandler implements HandlerExceptionResolver {
     public static Logger logger = LogManager.getLogger(ExceptionHandler.class);
 
-    @Override
     public ModelAndView resolveException(HttpServletRequest request,
                                          HttpServletResponse response, Object obj, Exception ex) {
         // TODO Auto-generated method stub
