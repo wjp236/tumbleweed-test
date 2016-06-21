@@ -2,6 +2,7 @@ package com.enn.test;
 
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
+import com.enn.common.SftpClientUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
@@ -56,6 +57,15 @@ public class StmTest {
         if (!(checkRet instanceof Boolean)) {
             log.info(checkRet);
         }
+    }
+
+    @Test
+    public void testSftp() {
+        String ftpPath = "/data/home/dev/file/wx";
+        String ftpfile = "/Users/mylover/Downloads/file.java";
+        SftpClientUtil fa = new SftpClientUtil();
+        fa.mkdir(ftpPath);
+//        fa.upload("10.37.148.254", 22, "dev", "dev", ftpPath, ftpfile);
     }
 
 }
