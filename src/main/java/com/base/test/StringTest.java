@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -292,6 +293,15 @@ public class StringTest {
             default: {
                 log.info("default");
             }
+        }
+    }
+
+    @Test
+    public void checkTradeNoTime() throws ParseException {
+        long currentSecondTime = new Date().getTime();
+        long tradeNoCteTimeMs = new SimpleDateFormat("yyyyMMddHHmmss").parse("20160622142251").getTime();
+        if ((currentSecondTime - tradeNoCteTimeMs) > 0) {
+            log.info("2222222");
         }
     }
 
