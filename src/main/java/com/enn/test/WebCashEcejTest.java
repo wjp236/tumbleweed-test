@@ -68,15 +68,15 @@ public class WebCashEcejTest {
         json.put("salt", "000000");
         json.put("req_ip", "127.0.0.1");
         json.put("biz_type", "GOODS");
-        json.put("trade_amt", "0.0");
+        json.put("trade_amt", "1.0");
         json.put("trade_desc", "篮球");
-        json.put("req_time",    "20160622062820");
-        json.put("time_expire", "20160622172820");
+        json.put("req_time",    "20160624062820");
+        json.put("time_expire", "20160624172820");
         json.put("trade_mode", "GUARANTEEPAY");
         json.put("trade_detail", "秘制篮球");
         json.put("currency", "CNY");
         json.put("pay_type", "APP");
-        json.put("merc_order_no", "test00101");
+        json.put("merc_order_no", "20160624062822");
         json.put("attach", "userdata");
         json.put("receive_no", "1234567890");
         json.put("notify_url", "http://10.37.148.254:9022/webCash-core/webCash/xinyi/make/metCallBack");
@@ -93,12 +93,34 @@ public class WebCashEcejTest {
         HttpPostUtil.sendJSON(url, requestBody);
     }
 
+    /**
+     * 唤起收银台签名
+     */
+    @Test
+    public void getThdSdk() throws IOException, NoSuchAlgorithmException {
+        JSONObject json = new JSONObject();
+        json.put("salt","123456");
+        json.put("merc_id", "8011056811254598983686");
+        json.put("trade_no", "124201606241101010000011186816");
+        json.put("req_time","20160428105935");
+        json.put("appid", "A000001");
+        json.put("tradeChannel", "ZFB");
+        log.info(json);
+
+        String body = json.toString();
+        String url = serverUrl + "/xinyi/make/signature";
+        String requestBody = HttpPostUtil.sendJSON(url, body);
+
+        String callUrl = serverUrl + "/pay/getThdSdk";
+        HttpPostUtil.sendJSON(callUrl, requestBody);
+    }
+
     @Test
     public void account() throws IOException, NoSuchAlgorithmException {
         JSONObject json = new JSONObject();
         json.put("salt","123456");
         json.put("merc_id", "8011056811254598983686");
-        json.put("trade_no", "124201606221207020000012235392");
+        json.put("trade_no", "124201606241059440000010138240");
         json.put("req_time","20160428105935");
         String body = json.toString();
         log.info(body);
@@ -109,27 +131,6 @@ public class WebCashEcejTest {
         HttpPostUtil.sendJSON(url, requestBody);
     }
 
-    /**
-     * 唤起收银台签名
-     */
-    @Test
-    public void getThdSdk() throws IOException, NoSuchAlgorithmException {
-        JSONObject json = new JSONObject();
-        json.put("salt","123456");
-        json.put("merc_id", "8011056811254598983686");
-        json.put("trade_no", "124201606201810460000012103296");
-        json.put("req_time","20160428105935");
-        json.put("appid", "A000001");
-        json.put("tradeChannel", "CUP");
-        log.info(json);
-
-        String body = json.toString();
-        String url = serverUrl + "/xinyi/make/signature";
-        String requestBody = HttpPostUtil.sendJSON(url, body);
-
-        String callUrl = serverUrl + "/pay/getThdSdk";
-        HttpPostUtil.sendJSON(callUrl, requestBody);
-    }
 
     /**
      * 回调接口
