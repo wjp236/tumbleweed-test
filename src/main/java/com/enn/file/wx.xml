@@ -4,14 +4,14 @@
     <appid><![CDATA[wxfc310344ec9c7695]]></appid>
     <mch_id><![CDATA[1354160602]]></mch_id>
     <nonce_str><![CDATA[id6Y4FSxncBcfGiJ]]></nonce_str>
-    <sign><![CDATA[4A1ECA41BFBE3C66E1D35AF5F9D651DD]]></sign>
+    <sign><![CDATA[9FA147C11A4CB331A08AD583AAE69579]]></sign>
     <result_code><![CDATA[SUCCESS]]></result_code>
     <openid><![CDATA[ZD]]></openid>
     <trade_type><![CDATA[APP]]></trade_type>
     <bank_type><![CDATA[CMC]]></bank_type>
-    <total_fee><![CDATA[1122]]></total_fee>
+    <total_fee><![CDATA[100]]></total_fee>
     <cash_fee><![CDATA[0]]></cash_fee>
     <transaction_id><![CDATA[WX000000001]]></transaction_id>
-    <out_trade_no><![CDATA[782792400896]]></out_trade_no>
-    <time_end><![CDATA[20160622133525]]></time_end>
+    <out_trade_no><![CDATA[1401137832960]]></out_trade_no>
+    <time_end><![CDATA[20160627111125]]></time_end>
 </xml>

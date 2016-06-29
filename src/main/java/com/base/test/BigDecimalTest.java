@@ -31,4 +31,19 @@ public class BigDecimalTest {
         log.info("----- {}", b2.compareTo(b1));
     }
 
+    @Test
+    public void test2() {
+        Integer i = 7;
+        Integer j = 7;
+        if (i == j) {
+            log.info("-----true");
+        }
+
+        Integer m = -128;
+        Integer n = -128;
+        if (m == n) {
+            log.info("-----true-----");
+        }
+    }
+
 }
