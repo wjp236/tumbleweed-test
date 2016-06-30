@@ -28,4 +28,12 @@ public class DoubleTest {
         log.info(Math.round(x));
     }
 
+    @org.junit.Test
+    public void test0() {
+        Double i = 0.0;
+        if (i == 0) {
+            log.info("true");
+        }
+    }
+
 }
