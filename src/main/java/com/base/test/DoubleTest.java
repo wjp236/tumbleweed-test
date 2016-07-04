@@ -36,4 +36,11 @@ public class DoubleTest {
         }
     }
 
+    @org.junit.Test
+    public void test1() {
+        Double i;
+
+
+    }
+
 }

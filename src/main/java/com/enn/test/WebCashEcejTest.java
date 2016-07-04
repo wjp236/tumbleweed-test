@@ -6,8 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -26,6 +24,8 @@ public class WebCashEcejTest {
     private static final String localServerUrl = "http://localhost:8080/webCash";
     private static final String serverUrl = "http://222.222.120.75:8080/webCash-core/webCash";
     private static final String serverDevUrl = "http://10.37.148.254:9022/webCash-core/webCash";
+    private static final String testServerUrl = "http://119.254.196.122:9022/webCash-core/webCash";
+    private static final String etestServerUrl = "http://pay.t.ecej.com/webCash-core/webCash";
 
     @Test
     public void makePwd() {
@@ -38,10 +38,10 @@ public class WebCashEcejTest {
      */
     @Test
     public void binding() throws IOException, NoSuchAlgorithmException {
-        Document document = DocumentHelper.createDocument();
-        Element root = document.addElement("Response");
-        root.addElement("appId").addText("ff8081813fc747ee013fc74998810001");
-        root.addElement("test").addText("test");
+//        Document document = DocumentHelper.createDocument();
+//        Element root = document.addElement("Response");
+//        root.addElement("appId").addText("ff8081813fc747ee013fc74998810001");
+//        root.addElement("test").addText("test");
 
         JSONObject json = new JSONObject();
         json.put("merc_id", "8011056811254598983686");
@@ -50,10 +50,9 @@ public class WebCashEcejTest {
         json.put("user_token", "16f71ae9eae144d2a5c22a0922480257");
         json.put("signature", "xinyiPay");
 
-//        String body = document.asXML();
         String body = json.toString();
 
-        String url = localServerUrl + "/xinyi/make/signature";
+        String url = testServerUrl + "/xinyi/make/signature";
 
         log.info(url);
         HttpPostUtil.sendXml(url, body);
@@ -87,10 +86,10 @@ public class WebCashEcejTest {
         json.put("packAmt", "1.0");
         String body = json.toString();
         log.info(body);
-        String urlsignature = serverUrl + "/xinyi/make/signature";
+        String urlsignature = testServerUrl + "/xinyi/make/signature";
         String requestBody = HttpPostUtil.sendJSON(urlsignature, body);
 
-        String url = serverUrl + "/pay/unifiedOrder";
+        String url = testServerUrl + "/pay/unifiedOrder";
         HttpPostUtil.sendJSON(url, requestBody);
     }
 
