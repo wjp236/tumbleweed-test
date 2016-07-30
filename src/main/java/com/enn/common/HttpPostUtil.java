@@ -48,6 +48,7 @@ public class HttpPostUtil {
 
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost(url);
+        httppost.setHeader("Content-Type", "text/html;charset=utf-8");
         HttpEntity entity = new StringEntity(body, "UTF-8");
         httppost.setEntity(entity);
         HttpResponse httpresponse = httpclient.execute(httppost);

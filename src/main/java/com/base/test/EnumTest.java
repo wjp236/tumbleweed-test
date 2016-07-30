@@ -14,7 +14,7 @@ public class EnumTest {
     @org.junit.Test
     public void test1() {
         TradeStatus test = TradeStatus.valueOf("WAITPAY");
-        log.info("test:{}", test.code());
+        log.info("test:{}", test.toString());
 
 
 

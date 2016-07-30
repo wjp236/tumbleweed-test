@@ -30,7 +30,7 @@ public class DoubleTest {
 
     @org.junit.Test
     public void test0() {
-        Double i = 0.0;
+        Double i = 0.00;
         if (i == 0) {
             log.info("true");
         }
@@ -38,7 +38,6 @@ public class DoubleTest {
 
     @org.junit.Test
     public void test1() {
-        Double i;
 
 
     }

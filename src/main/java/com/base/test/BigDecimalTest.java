@@ -46,4 +46,22 @@ public class BigDecimalTest {
         }
     }
 
+    @Test
+    public void test3() {
+        TestModel testModel = new TestModel();
+        log.info(BigDecimal.valueOf(testModel.getI()));
+    }
+
+}
+
+class TestModel {
+    private double i;
+
+    public double getI() {
+        return i;
+    }
+
+    public void setI(double i) {
+        this.i = i;
+    }
 }

@@ -21,11 +21,11 @@ public class WebCashEcejTest {
 
     public Logger log = LogManager.getLogger(WebCashEcejTest.class);
 
-    private static final String localServerUrl = "http://localhost:8080/webCash";
-    private static final String serverUrl = "http://222.222.120.75:8080/webCash-core/webCash";
+    private static final String localServerUrl = "http://localhost:8081/webCash";
+    private static final String serverUrl = "http://222.222.120.75:8081/webCash-core/webCash";
     private static final String serverDevUrl = "http://10.37.148.254:9022/webCash-core/webCash";
     private static final String testServerUrl = "http://119.254.196.122:9022/webCash-core/webCash";
-    private static final String etestServerUrl = "http://pay.t.ecej.com/webCash-core/webCash";
+    private static final String ecejtestServerUrl = "http://pay.t.ecej.com/webCash-core/webCash";
 
     @Test
     public void makePwd() {
@@ -180,8 +180,29 @@ public class WebCashEcejTest {
         Document document = reader.read(f);
         String value = document.asXML();
         log.info(value);
-        String callUrl = serverUrl + "/pay/callBack/WX";
+        String callUrl = localServerUrl + "/pay/callBack/WX";
         HttpPostUtil.sendJSON(callUrl, value);
+    }
+
+    @Test
+    public void testMq() throws IOException, NoSuchAlgorithmException {
+
+        String url = localServerUrl + "/xinyi/test/mq";
+
+        JSONObject json = new JSONObject();
+        json.put("requestId","123456");
+        json.put("appId", "1234567890");
+        json.put("accountDate", "20161111111111");
+        json.put("currency","1");
+        json.put("tradeAmount", "1.00");
+        json.put("privilegePrice", "1.00");
+        json.put("xinyiShell", "1.00");
+        json.put("cash", "1.00");
+        json.put("payChannel", "1");
+        json.put("type", "1");
+
+        HttpPostUtil.sendXml(url, json.toString());
+
     }
 
 
