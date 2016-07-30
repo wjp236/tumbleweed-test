@@ -201,7 +201,7 @@ public class WebCashEcejTest {
         json.put("payChannel", "1");
         json.put("type", "1");
 
-        HttpPostUtil.sendXml(url, json.toString());
+        HttpPostUtil.sendJSON(url, json.toString());
 
     }
 
