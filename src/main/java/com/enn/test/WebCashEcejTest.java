@@ -73,8 +73,8 @@ public class WebCashEcejTest {
         json.put("biz_type", "GOODS");
         json.put("trade_amt", "1.0");
         json.put("trade_desc", "篮球");
-        json.put("req_time",    "20160812000000");
-        json.put("time_expire", "20160812230000");
+        json.put("req_time",    "20160815000000");
+        json.put("time_expire", "20160815230000");
         json.put("trade_mode", "GUARANTEEPAY");
         json.put("trade_detail", "秘制篮球");
         json.put("currency", "CNY");
@@ -94,7 +94,9 @@ public class WebCashEcejTest {
 
         String requestBody = HttpPostUtil.sendJSON(urlsignature, body);
 
-        String url = proServerUrl + "/pay/unifiedOrder";
+        log.info(requestBody);
+
+        String url = serverUrl + "/pay/unifiedOrder";
 
 //        String urlProtobuf = biztestServerUrl + "/pay/unifiedOrder/protobuf";
 
@@ -120,7 +122,7 @@ public class WebCashEcejTest {
         String url = serverUrl + "/xinyi/make/signature";
         String requestBody = HttpPostUtil.sendJSON(url, body);
 
-        String callUrl = proServerUrl + "/pay/getThdSdk";
+        String callUrl = serverUrl + "/pay/getThdSdk";
         HttpPostUtil.sendJSON(callUrl, requestBody);
     }
 
