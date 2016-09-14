@@ -15,6 +15,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 /**
  * Created by mylover on 4/9/16.
@@ -41,7 +42,7 @@ public class WebCashEcejTest {
      */
     @Test
     public void binding() throws IOException, NoSuchAlgorithmException {
-//        Document document = DocumentHelper.createDocument();
+//        Document document = DocumentHelper.creheihateDocument();
 //        Element root = document.addElement("Response");
 //        root.addElement("appId").addText("ff8081813fc747ee013fc74998810001");
 //        root.addElement("test").addText("test");
@@ -55,7 +56,7 @@ public class WebCashEcejTest {
 
         String body = json.toString();
 
-        String url = proServerUrl + "/xinyi/make/signature";
+        String url = localServerUrl + "/xinyi/make/signature";
 
         log.info(url);
         HttpPostUtil.sendJSON(url, body);
@@ -73,8 +74,8 @@ public class WebCashEcejTest {
         json.put("biz_type", "GOODS");
         json.put("trade_amt", "1.0");
         json.put("trade_desc", "篮球");
-        json.put("req_time",    "20160815000000");
-        json.put("time_expire", "20160815230000");
+        json.put("req_time",    "20160826000000");
+        json.put("time_expire", "20160826234500");
         json.put("trade_mode", "GUARANTEEPAY");
         json.put("trade_detail", "秘制篮球");
         json.put("currency", "CNY");
@@ -90,13 +91,13 @@ public class WebCashEcejTest {
 
         String body = json.toString();
 
-        String urlsignature = serverUrl + "/xinyi/make/signature";
+        String urlsignature = proServerUrl + "/xinyi/make/signature";
 
         String requestBody = HttpPostUtil.sendJSON(urlsignature, body);
 
         log.info(requestBody);
 
-        String url = serverUrl + "/pay/unifiedOrder";
+        String url = proServerUrl + "/pay/unifiedOrder";
 
 //        String urlProtobuf = biztestServerUrl + "/pay/unifiedOrder/protobuf";
 
@@ -112,17 +113,17 @@ public class WebCashEcejTest {
         JSONObject json = new JSONObject();
         json.put("salt","123456");
         json.put("merc_id", "8011056811254598983686");
-        json.put("trade_no", "124201608120955520000010007168");
+        json.put("trade_no", "124201608262333420000012104320");
         json.put("req_time","20160428105935");
         json.put("appid", "A000001");
         json.put("tradeChannel", "WX");
         log.info(json);
 
         String body = json.toString();
-        String url = serverUrl + "/xinyi/make/signature";
+        String url = proServerUrl + "/xinyi/make/signature";
         String requestBody = HttpPostUtil.sendJSON(url, body);
 
-        String callUrl = serverUrl + "/pay/getThdSdk";
+        String callUrl = proServerUrl + "/pay/getThdSdk";
         HttpPostUtil.sendJSON(callUrl, requestBody);
     }
 
@@ -212,7 +213,6 @@ public class WebCashEcejTest {
         json.put("payChannel", "1");
         json.put("type", "2");
         json.put("bizType", "PAYMENT");
-
         log.info(json.toString());
 
         Gson gson = new Gson();
@@ -224,6 +224,76 @@ public class WebCashEcejTest {
 //        HttpPostUtil.sendJSON(url, json.toString());
 
     }
+
+    /**
+     * 测试disconf
+     */
+    @Test
+    public void disconf() throws IOException, NoSuchAlgorithmException {
+
+        JSONObject json = new JSONObject();
+        json.put("merc_id", "8011056811254598983686");
+        json.put("salt", "123456789");
+        json.put("req_time", "20160426163043");
+        json.put("signature", "xinyiPay");
+        json.put("date", new Date().toString());
+
+        String body = json.toString();
+
+        String url = localServerUrl + "/xinyi/test/disconf";
+
+        log.info(url);
+
+        HttpPostUtil.sendJSON(url, body);
+    }
+
+    /**
+     * logback
+     */
+    @Test
+    public void logback() throws IOException, NoSuchAlgorithmException {
+
+        JSONObject json = new JSONObject();
+        json.put("merc_id", "8011056811254598983686");
+        json.put("salt", "123456789");
+        json.put("req_time", "20160426163043");
+        json.put("signature", "xinyiPay");
+        json.put("date", new Date().toString());
+
+        String body = json.toString();
+
+        String url = localServerUrl + "/xinyi/test/logback";
+
+        log.info(url);
+
+        HttpPostUtil.sendJSON(url, body);
+
+    }
+
+    /**
+     * log4j2
+     */
+    @Test
+    public void log4j2() throws IOException, NoSuchAlgorithmException {
+
+        JSONObject json = new JSONObject();
+        json.put("merc_id", "8011056811254598983686");
+        json.put("salt", "123456789");
+        json.put("req_time", "20160426163043");
+        json.put("signature", "xinyiPay");
+        json.put("date", new Date().toString());
+
+        String body = json.toString();
+
+        String url = localServerUrl + "/xinyi/test/log4j2";
+
+        log.info(url);
+
+        HttpPostUtil.sendJSON(url, body);
+
+    }
+
+
 
 
 

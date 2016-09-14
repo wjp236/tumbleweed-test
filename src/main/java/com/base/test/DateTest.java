@@ -26,4 +26,9 @@ public class DateTest {
         log.info(date3);
     }
 
+    @Test
+    public void test1() {
+        log.info(new Date().toString());
+    }
+
 }
