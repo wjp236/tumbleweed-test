@@ -305,4 +305,16 @@ public class StringTest {
         }
     }
 
+    @Test
+    public void testNull() {
+        String test = "http://emp.ecej.com/v1/pay/paidCallBack";
+        if (test.startsWith("http://")) {
+            log.info("enter1");
+        } else if (test.startsWith("https://")) {
+            log.info("enter2");
+        } else {
+            log.info("enter3");
+        }
+    }
+
 }

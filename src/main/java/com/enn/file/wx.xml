@@ -1,7 +1,7 @@
 <xml>
     <return_code><![CDATA[SUCCESS]]></return_code>
     <return_msg><![CDATA[OK]]></return_msg>
-    <appid><![CDATA[wxfc310344ec9c7695]]></appid>
+    <appid><![CDATA[test]]></appid>
     <mch_id><![CDATA[1354160602]]></mch_id>
     <nonce_str><![CDATA[id6Y4FSxncBcfGiJ]]></nonce_str>
     <sign><![CDATA[9FA147C11A4CB331A08AD583AAE69579]]></sign>
