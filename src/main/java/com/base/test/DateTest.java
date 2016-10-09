@@ -31,4 +31,9 @@ public class DateTest {
         log.info(new Date().toString());
     }
 
+    @Test
+    public void test2() {
+        log.info(String.valueOf(System.currentTimeMillis()).length());
+    }
+
 }

@@ -97,4 +97,20 @@ public class XinyipayPo implements Serializable {
     public void setRequestId(String requestId) {
         this.requestId = requestId;
     }
+
+    @Override
+    public String toString() {
+        return "XinyipayPo{" +
+                "requestId='" + requestId + '\'' +
+                ", appId='" + appId + '\'' +
+                ", accountDate='" + accountDate + '\'' +
+                ", currency='" + currency + '\'' +
+                ", tradeAmount=" + tradeAmount +
+                ", privilegePrice=" + privilegePrice +
+                ", xinyiShell=" + xinyiShell +
+                ", cash=" + cash +
+                ", payChannel='" + payChannel + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }
