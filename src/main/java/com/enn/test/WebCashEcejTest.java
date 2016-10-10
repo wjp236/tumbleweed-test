@@ -166,6 +166,30 @@ public class WebCashEcejTest {
         HttpPostUtil.sendJSON(url, requestBody);
     }
 
+    @Test
+    public void refund() throws IOException, NoSuchAlgorithmException {
+        JSONObject json = new JSONObject();
+        json.put("merc_id", "8011056811254598983686");
+        json.put("salt","123456");
+        json.put("req_time","20161010105935");
+        json.put("trade_no", "124201610091559050000011055744");
+        json.put("merc_refund_no", "ALIPAY3625700000000477181");
+        json.put("refund_amount", "460.02");
+        json.put("currency", "CNY");
+        json.put("receiver_no", "80159620639416322");
+//        json.put("notify_url", serverUrl + "/xinyi/make/signature");
+
+        String body = json.toString();
+        log.info(body);
+
+        String urlsignature = serverUrl + "/xinyi/make/signature";
+        String requestBody = HttpPostUtil.sendJSON(urlsignature, body);
+
+        String url = proServerUrl + "/pay/refund";
+        HttpPostUtil.sendJSON(url, requestBody);
+
+    }
+
 
     /**
      * 回调接口
