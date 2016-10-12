@@ -2,37 +2,66 @@
 
 <Configuration status="error">
     <Properties>
-        <Property name="log_home">/Users/mylover/Workspaces/log/restTest</Property>
+        <Property name="log_home">/Users/mylover/Workspaces/log/enn-dev/tumbleweed-test</Property>
+        <Property name="log_charset">UTF-8</Property>
+        <Property name="log_dir">${log_home}/%d{yyyyMMdd}</Property>
+        <Property name="log_msg">-|[%X{requestId}]|[%d{yyyy-MM-dd HH:mm:ss.SSS}]|[%thread]|[%-5p]|[%c{0}] ||| %m%n</Property>
     </Properties>
-
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="busiess"/>
+            <AppenderRef ref="error_log"/>
+        </Root>
+        <Logger name="org.springframework" level="error" additivity="false">
+            <AppenderRef ref="busiess"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="net.sf.ezmorph.bean.BeanMorpher" level="error" additivity="false">
+            <AppenderRef ref="busiess"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="net.sf.json.JSONObject" level="error" additivity="false">
+            <AppenderRef ref="busiess"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="org.apache.zookeeper" level="error" additivity="false">
+            <AppenderRef ref="busiess"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="com.alibaba.dubbo.remoting" level="error" additivity="false">
+            <AppenderRef ref="busiess"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="com.alibaba.dubbo.monitor" level="error" additivity="false">
+            <AppenderRef ref="error_log"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+        <Logger name="org.apache.commons" level="error" additivity="false">
+            <AppenderRef ref="error_log"/>
+            <AppenderRef ref="console"/>
+        </Logger>
+    </Loggers>
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss,SSS} [%p] %c{1}%x - %m%n"/>
+            <PatternLayout charset="${log_charset}" pattern="${log_msg}"/>
         </Console>
-
-        <RollingRandomAccessFile name="cloudcom" fileName="${log_home}/cloudcom.log"
-                                 filePattern="${log_home}/cloudcom.log.%-d{yyyy-MM-dd-HH}">
-            <PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss,SSS} %x - %m%n"/>
+        <RollingRandomAccessFile name="busiess" fileName="${log_home}/busiess.log"
+                                 filePattern="${log_dir}/bussiess.log.%-d{yyyy-MM-dd-HH}_%i">
+            <PatternLayout charset="${log_charset}" pattern="${log_msg}"/>
             <Policies>
-                <TimeBasedTriggeringPolicy interval="20" modulate="false"/>
+                <SizeBasedTriggeringPolicy size="50MB"/>
+                <TimeBasedTriggeringPolicy interval="2" modulate="true"/>
             </Policies>
         </RollingRandomAccessFile>
-
-        <RollingRandomAccessFile name="clouderror" fileName="${log_home}/clouderror.log"
-                                 filePattern="${log_home}/clouderror.log.%-d{yyyy-MM-dd}">
+        <RollingRandomAccessFile name="error_log" fileName="${log_home}/error_log.log"
+                                 filePattern="${log_dir}/error_log.log.%-d{yyyy-MM-dd}_%i">
             <ThresholdFilter level="error" onMatch="ACCEPT"/>
-            <PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss,SSS} %x - %m%n"/>
+            <PatternLayout charset="${log_charset}" pattern="${log_msg}"/>
             <Policies>
+                <SizeBasedTriggeringPolicy size="50MB"/>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
         </RollingRandomAccessFile>
     </Appenders>
-
-    <Loggers>
-        <Root level="info">
-            <AppenderRef ref="console"/>
-            <AppenderRef ref="cloudcom"/>
-            <AppenderRef ref="clouderror"/>
-        </Root>
-    </Loggers>
 </Configuration>
