@@ -59,10 +59,12 @@ public class WebCashEcejTest {
         String body = json.toString();
 
 
-        String url = testServerUrlYun + "/xinyi/make/signature";
+        String url = localServerUrl + "/xinyi/make/signature";
 
         log.info(url);
-        for (int i = 0; i < 1 ; i++) {
+        for (int i = 0;
+//             i < 1
+                ; i++) {
             HttpPostUtil.sendJSON(url, body);
             Thread.sleep(10);
         }
@@ -80,8 +82,8 @@ public class WebCashEcejTest {
         json.put("biz_type", "GOODS");
         json.put("trade_amt", "1.0");
         json.put("trade_desc", "篮球");
-        json.put("req_time",    "20161028000000");
-        json.put("time_expire", "20161028234500");
+        json.put("req_time",    "20161031000000");
+        json.put("time_expire", "20161031234500");
         json.put("trade_mode", "GUARANTEEPAY");
         json.put("trade_detail", "秘制篮球");
         json.put("currency", "CNY");
@@ -98,13 +100,13 @@ public class WebCashEcejTest {
 
         String body = json.toString();
 
-        String urlsignature = testServerUrlYun + "/xinyi/make/signature";
+        String urlsignature = biztestServerUrl + "/xinyi/make/signature";
 
         String requestBody = HttpPostUtil.sendJSON(urlsignature, body);
 
         log.info(requestBody);
 
-        String url = testServerUrlYun + "/pay/unifiedOrder";
+        String url = biztestServerUrl + "/pay/unifiedOrder";
 
 //        String urlProtobuf = biztestServerUrl + "/pay/unifiedOrder/protobuf";
 

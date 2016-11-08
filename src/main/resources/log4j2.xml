@@ -5,7 +5,7 @@
         <Property name="log_home">/Users/mylover/Workspaces/log/enn-dev/tumbleweed-test</Property>
         <Property name="log_charset">UTF-8</Property>
         <Property name="log_dir">${log_home}/%d{yyyyMMdd}</Property>
-        <Property name="log_msg">-|[%X{requestId}]|[%d{yyyy-MM-dd HH:mm:ss.SSS}]|[%thread]|[%-5p]|[%c{0}] ||| %m%n</Property>
+        <Property name="log_msg">-|[%X{requestId}]|[%d{yyyy-MM-dd HH:mm:ss.SSS}]|[${hostName}]|[%thread]|[%-5p]|[%c{0}] ||| %m%n</Property>
     </Properties>
     <Loggers>
         <Root level="INFO">
