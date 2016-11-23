@@ -61,7 +61,7 @@ public class HttpPostUtil {
         StatusLine statusLine = httpresponse.getStatusLine();
         int status = statusLine.getStatusCode();
 
-        logger.info("状态:" + status + ";返回包体:" + conResult);
+        logger.info("\n\n\n\n状态:" + status + ";返回包体:" + conResult);
 
         return "status=" + status + ";conResult=" + conResult;
 
@@ -92,7 +92,7 @@ public class HttpPostUtil {
         StatusLine statusLine = httpresponse.getStatusLine();
         int status = statusLine.getStatusCode();
 
-        logger.info("状态:" + status + ";返回包体:" + conResult);
+        logger.info("\n\n\n\n状态:" + status + ";返回包体:" + conResult);
 
         return "status=" + status + ";conResult=" + conResult;
 

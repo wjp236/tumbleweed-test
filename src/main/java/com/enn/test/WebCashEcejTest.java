@@ -59,11 +59,11 @@ public class WebCashEcejTest {
         String body = json.toString();
 
 
-        String url = localServerUrl + "/xinyi/make/signature";
+        String url = biztestServerUrl + "/xinyi/make/signature";
 
         log.info(url);
         for (int i = 0;
-//             i < 1
+             i < 1
                 ; i++) {
             HttpPostUtil.sendJSON(url, body);
             Thread.sleep(10);
@@ -82,8 +82,8 @@ public class WebCashEcejTest {
         json.put("biz_type", "GOODS");
         json.put("trade_amt", "1.0");
         json.put("trade_desc", "篮球");
-        json.put("req_time",    "20161031000000");
-        json.put("time_expire", "20161031234500");
+        json.put("req_time",    "20161117000000");
+        json.put("time_expire", "20161117234500");
         json.put("trade_mode", "GUARANTEEPAY");
         json.put("trade_detail", "秘制篮球");
         json.put("currency", "CNY");
@@ -106,7 +106,7 @@ public class WebCashEcejTest {
 
         log.info(requestBody);
 
-        String url = biztestServerUrl + "/pay/unifiedOrder";
+        String url = testServerUrlYun + "/pay/unifiedOrder";
 
 //        String urlProtobuf = biztestServerUrl + "/pay/unifiedOrder/protobuf";
 
@@ -124,7 +124,7 @@ public class WebCashEcejTest {
         JSONObject json = new JSONObject();
         json.put("salt","123456");
         json.put("merc_id", "8011056811254598983686");
-        json.put("trade_no", "124201610281125550000013218432");
+        json.put("trade_no", "124201611171535560000010072704");
         json.put("req_time","20160428105935");
         json.put("appid", "A000001");
         json.put("tradeChannel", "WX");
@@ -176,11 +176,11 @@ public class WebCashEcejTest {
         json.put("merc_id", "8011056811254598983686");
         json.put("salt","123456");
         json.put("req_time","20161010105935");
-        json.put("trade_no", "124201610091559050000011055744");
-        json.put("merc_refund_no", "ALIPAY3625700000000477181");
-        json.put("refund_amount", "460.02");
+        json.put("trade_no", "124201611040927240000010039936");
+        json.put("merc_refund_no", "anemployee_6399");
+        json.put("refund_amount", "1204.00");
         json.put("currency", "CNY");
-        json.put("receiver_no", "80159620639416322");
+        json.put("receiver_no", "80126913246453700");
 //        json.put("notify_url", serverUrl + "/xinyi/make/signature");
 
         String body = json.toString();

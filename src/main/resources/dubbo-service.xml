@@ -6,9 +6,12 @@
 		http://code.alibabatech.com/schema/dubbo
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:application name="test-client" />
+    <dubbo:application name="test-service" />
+
     <dubbo:registry address="zookeeper://10.4.89.152:2181"/>
-    <!--<dubbo:protocol name="hessian" port="28080"  contextpath="testinfo" server="servlet" />-->
-    <dubbo:reference id="testDubbo" interface="com.base.dubbo.TestDubbo"/>
+
+    <dubbo:protocol name="hessian" port="28080" server="servlet"/>
+
+    <dubbo:service protocol="hessian" interface="com.base.dubbo.TestDubbo" ref="testDubbo" version="1.0"/>
 
 </beans>
