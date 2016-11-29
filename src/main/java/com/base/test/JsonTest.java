@@ -1,7 +1,11 @@
 package com.base.test;
 
+import com.alibaba.fastjson.JSON;
 import com.base.common.Base64;
 import com.base.common.MD5;
+import com.base.common.MD5SignAndValidate;
+import com.base.model.Model;
+import com.yuntongxun.model.CCPAccount;
 import com.yuntongxun.model.PushMessage;
 import com.yuntongxun.model.Response;
 import net.sf.json.JSONObject;
@@ -27,7 +31,6 @@ import org.jdom2.input.SAXBuilder;
 import org.junit.Test;
 import org.ming.sample.util.JSONUtil;
 import org.xml.sax.InputSource;
-import com.yuntongxun.model.CCPAccount;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -307,5 +310,46 @@ public class JsonTest {
             log.info("timeoutrecordurl is null");
         }
         System.out.println(timeoutrecordurl);
+    }
+
+
+
+    @Test
+    public void fastJson() {
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("username", "zhangsan");
+        map.put("age", 24);
+        map.put("sex", "男");
+
+        //map集合
+        HashMap<String, Object> temp = new HashMap<>();
+        temp.put("name", "xiaohong");
+        temp.put("age", "23");
+
+
+        map.put("girlInfo",  JSON.toJSONString(temp));
+
+        Map<String, Object> signData = MD5SignAndValidate.signData(map, "xinyipay");
+
+        String jsonString = JSON.toJSONString(signData);
+
+        log.info("\njsonString:" + jsonString);
+
+        Map<String, Object> resultMap = JSON.parseObject(jsonString);
+
+        log.info(MD5SignAndValidate.validateData(resultMap, "xinyipay"));
+
+
+        Model model = new Model();
+        model.setKey("test");
+        model.setValue("testValue");
+
+        String json = JSON.toJSONString(model);
+
+        log.info(json);
+
+        Map model1 = JSON.parseObject(json, Map.class);
+
     }
 }

@@ -17,7 +17,8 @@ public class TransactionEcejTest {
 
     public Logger log = LogManager.getLogger(TransactionEcejTest.class);
 
-    private static final String localServerUrl = "http://localhost:8080/Transaction";
+    private static final String localServerUrl = "http://localhost:8080";
+    private static final String devServerUrl = "http://10.37.148.254:9003/transaction-web/Transaction";
 
     /**
      * 下单
@@ -49,15 +50,16 @@ public class TransactionEcejTest {
 
         String body = json.toString();
 
-        String appId = "A00009";
+        String appId = "inner";
 
         String token = "123456";
 
-        String url = localServerUrl + "/" + appId + "/pay/trade";
+//        String url = devServerUrl + "/" + appId + "/pay/trade";
+        String url = localServerUrl + "/" + appId + "/pay/callBack";
 
         log.info(url);
 
-        HttpPostUtil.sendJSON(appId, token, url, body);
+        HttpPostUtil.sendJSON(appId, token, url, "test");
 
     }
 

@@ -26,6 +26,7 @@ public class WebCashEcejTest {
 
     private static final String localServerUrl = "http://localhost:8080/webCash";
     private static final String serverUrl = "http://222.222.120.75:8081/webCash-core/webCash";
+    private static final String devServerUrl = "http://devpay.ecej.com/webCash-core/webCash";
     private static final String serverDevUrl = "http://10.37.148.254:9022/webCash-core/webCash";
     private static final String serverDevUrl10 = "http://10.37.149.26:8730/webCash";
     private static final String testServerUrl = "http://183.196.130.125:9022/webCash-core/webCash";
@@ -59,7 +60,7 @@ public class WebCashEcejTest {
         String body = json.toString();
 
 
-        String url = biztestServerUrl + "/xinyi/make/signature";
+        String url = testServerUrlYun + "/xinyi/make/signature";
 
         log.info(url);
         for (int i = 0;

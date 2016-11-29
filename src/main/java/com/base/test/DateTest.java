@@ -36,4 +36,24 @@ public class DateTest {
         log.info(String.valueOf(System.currentTimeMillis()).length());
     }
 
+    @Test
+    public void test3() {
+        log.info(beforeNHourToNowDate(-1));
+    }
+
+
+    /**
+     * 获取前N小时的时间
+     * （作者：zhangding<zhangding@enn.com>）
+     * @param hours
+     * @return
+     */
+    public static String beforeNHourToNowDate(int hours) {
+        Calendar calendar = Calendar.getInstance();
+		/* HOUR_OF_DAY 指示一天中的小时 */
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY)
+                - hours);
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+        return df.format(calendar.getTime());
+    }
 }
