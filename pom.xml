@@ -368,6 +368,17 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.20</version>
         </dependency>
+        <!-- rabbitmq -->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>${rabbitmq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+            <version>${spring-rabbit.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
