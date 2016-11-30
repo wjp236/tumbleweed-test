@@ -45,7 +45,7 @@ public class MsgSend {
         //创建一个频道
         Channel channel = connection.createChannel();
 
-        XT xt = XT.HEADERS;
+        XT xt = XT.DEFAULT;
 
         String queueName = QUEUE_NAME;
 
@@ -59,7 +59,7 @@ public class MsgSend {
                 //参数3：队列是否是独占的，如果为true只能被一个connection使用，其他连接建立时会抛出异常
                 //参数4：队列不再使用时是否自动删除（没有连接，并且没有未处理的消息)
                 //参数5：建立队列时的其他参数
-                channel.queueDeclare(QUEUE_NAME, true, false, true, null);
+                channel.queueDeclare(QUEUE_NAME, false, false, true, null);
 
                 while (GetInputString()) {
                     //向server发布一条消息

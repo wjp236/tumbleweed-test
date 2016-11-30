@@ -38,7 +38,7 @@ public class MsgRecv {
 
         String queueName = QUEUE_NAME;
 
-        XT xt = XT.HEADERS;
+        XT xt = XT.DEFAULT;
 
         switch (xt) {
             case DEFAULT:
