@@ -26,10 +26,10 @@ public class MsgSend {
 
     //exchange type
     public enum XT {
-        DEFAULT, DIRECT, TOPIC, HEADERS, FANOUT
+        DEFAULT, DIRECT, TOPIC, HEADERS, FANOUT, RPC
     }
 
-    public static void main(String[] args) throws java.io.IOException, TimeoutException {
+    public static void main(String[] args) throws java.io.IOException, TimeoutException, InterruptedException {
         /** * 创建连接连接到MabbitMQ */
         ConnectionFactory factory = new ConnectionFactory();
 
@@ -45,7 +45,9 @@ public class MsgSend {
         //创建一个频道
         Channel channel = connection.createChannel();
 
-        XT xt = XT.FANOUT;
+        XT xt = XT.HEADERS;
+
+        String queueName = QUEUE_NAME;
 
         //指定一个队列
         switch (xt) {
@@ -134,6 +136,27 @@ public class MsgSend {
 
                     channel.basicPublish(XCHG_NAME, "", builder.build(), temp[2].getBytes()); //根据headers路由到相应的consumer
                     System.out.println("Send " + message);
+                }
+                break;
+            case RPC:
+                //创建rpc回执队列
+                queueName = channel.queueDeclare().getQueue();
+                AMQP.BasicProperties props = new AMQP.BasicProperties.Builder().replyTo(queueName).build();
+                while (GetInputString()) {
+                    channel.basicPublish("", QUEUE_NAME, props, message.getBytes());
+                    System.out.println("Send " + message);
+
+                    //接收回调
+                    channel.basicQos(1);
+                    QueueingConsumer consumer = new QueueingConsumer(channel);
+                    channel.basicConsume(queueName, false, consumer);
+                    while (true) {
+                        QueueingConsumer.Delivery delivery = consumer.nextDelivery();
+                        System.out.println("Received " + new String(delivery.getBody()));
+                        //回复ack包，如果不回复，消息不会在服务器删除
+                        channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+                        //channel.basicReject(); channel.basicNack(); //可以通过这两个函数拒绝消息，可以指定消息在服务器删除还是继续投递给其他消费者
+                    }
                 }
                 break;
         }

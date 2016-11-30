@@ -1,15 +1,10 @@
 package com.base.rabbitmq;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.QueueingConsumer;
+import com.rabbitmq.client.*;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by mylover on 29/11/2016.
@@ -24,11 +19,11 @@ public class MsgRecv {
     private final static int POST = 5672;
 
     public enum XT {
-        DEFAULT, DIRECT, TOPIC, HEADERS, FANOUT
+        DEFAULT, DIRECT, TOPIC, HEADERS, FANOUT, RPC
     }
 
     @Test
-    public void main() throws IOException, TimeoutException, InterruptedException {
+    public void main() throws Exception {
         //打开连接和创建频道，与发送端一样
         ConnectionFactory factory = new ConnectionFactory();
         //设置MabbitMQ所在主机ip或者主机名
@@ -43,14 +38,14 @@ public class MsgRecv {
 
         String queueName = QUEUE_NAME;
 
-        XT xt = XT.FANOUT;
+        XT xt = XT.HEADERS;
+
         switch (xt) {
             case DEFAULT:
                 //队列的相关参数需要与第一次定义该队列时相同，否则会出错，使用channel.queueDeclarePassive()可只被动绑定已有队列，而不创建
-                channel.queueDeclare(queueName, true, false, true, null);
+                channel.queueDeclare(queueName, false, false, true, null);
                 break;
             case FANOUT:
-
                 //channel.exchangeDeclarePassive() 可以使用该函数使用一个已经建立的exchange
                 //接收端也声明一个fanout交换机
                 channel.exchangeDeclare(XCHG_NAME, "fanout", true, true, null);
@@ -86,6 +81,9 @@ public class MsgRecv {
                 }};
                 channel.queueBind(queueName, XCHG_NAME, "", headers);
                 break;
+            case RPC:
+                channel.queueDeclare(QUEUE_NAME, false, false, true, null);
+                break;
         }
 
         // 在同一时间不要给一个worker一个以上的消息。
@@ -103,15 +101,38 @@ public class MsgRecv {
         channel.basicConsume(queueName, false, consumer);
 //        channel.basicGet(queueName, true); //使用该函数主动去服务器检索是否有新消息，而不是等待服务器推送
 
-        while (true) {
-            QueueingConsumer.Delivery delivery = consumer.nextDelivery();
-            System.out.println("Received " + new String(delivery.getBody()));
+        switch (xt) {
+            case RPC:
+                while (true) {
+                    QueueingConsumer.Delivery delivery = consumer.nextDelivery();
 
-            //回复ack包，如果不回复，消息不会在服务器删除
-            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-            //channel.basicReject(); channel.basicNack(); //可以通过这两个函数拒绝消息，可以指定消息在服务器删除还是继续投递给其他消费者
+                    AMQP.BasicProperties props = delivery.getProperties();
+                    AMQP.BasicProperties replyProps = new AMQP.BasicProperties.Builder()
+                            .correlationId(props.getCorrelationId()).build();
+                    String message = new String(delivery.getBody());
+                    int n = Integer.parseInt(message);
+                    System.out.println("Received " + new String(delivery.getBody()));
+                    String response = "" + fib(n);
+                    channel.basicPublish("", props.getReplyTo(), replyProps, response.getBytes());
+                    channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+                }
+            default: {
+                while (true) {
+                    QueueingConsumer.Delivery delivery = consumer.nextDelivery();
+                    System.out.println("Received " + new String(delivery.getBody()));
+
+                    //回复ack包，如果不回复，消息不会在服务器删除
+                    channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+                    //channel.basicReject(); channel.basicNack(); //可以通过这两个函数拒绝消息，可以指定消息在服务器删除还是继续投递给其他消费者
+                }
+            }
         }
+    }
 
+    private static int fib(int n) throws Exception {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+        return fib(n-1) + fib(n-2);
     }
 
 }
