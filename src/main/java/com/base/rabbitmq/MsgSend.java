@@ -19,8 +19,10 @@ public class MsgSend {
     private final static int POST = 5672;
 
     private static Scanner scanner = new Scanner(System.in);
-    private static String message = "";
     public static String XCHG_NAME = "xchg_20161029";
+
+    private static String message = "";
+
 
     //exchange type
     public enum XT {
@@ -43,7 +45,7 @@ public class MsgSend {
         //创建一个频道
         Channel channel = connection.createChannel();
 
-        XT xt = XT.DEFAULT;
+        XT xt = XT.FANOUT;
 
         //指定一个队列
         switch (xt) {

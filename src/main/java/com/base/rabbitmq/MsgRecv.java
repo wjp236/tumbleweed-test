@@ -4,8 +4,6 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.QueueingConsumer;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -17,8 +15,6 @@ import java.util.concurrent.TimeoutException;
  * Created by mylover on 29/11/2016.
  */
 public class MsgRecv {
-
-    private final static Logger logger = LogManager.getLogger(MsgRecv.class);
 
     private final static String XCHG_NAME = "xchg_20161029";
 
@@ -47,18 +43,24 @@ public class MsgRecv {
 
         String queueName = QUEUE_NAME;
 
-        XT xt = XT.DEFAULT;
+        XT xt = XT.FANOUT;
         switch (xt) {
             case DEFAULT:
                 //队列的相关参数需要与第一次定义该队列时相同，否则会出错，使用channel.queueDeclarePassive()可只被动绑定已有队列，而不创建
                 channel.queueDeclare(queueName, true, false, true, null);
                 break;
             case FANOUT:
+
+                //channel.exchangeDeclarePassive() 可以使用该函数使用一个已经建立的exchange
                 //接收端也声明一个fanout交换机
                 channel.exchangeDeclare(XCHG_NAME, "fanout", true, true, null);
-                //channel.exchangeDeclarePassive() 可以使用该函数使用一个已经建立的exchange
+
                 //声明一个临时队列，该队列会在使用完比后自动销毁
-                queueName = channel.queueDeclare().getQueue();
+//                queueName = channel.queueDeclare().getQueue();
+
+                //声明持久化队列
+                channel.queueDeclare(queueName, true, false, true, null);
+
                 //将队列绑定到交换机,参数3无意义此时
                 channel.queueBind(queueName, MsgSend.XCHG_NAME, "");
                 break;
@@ -99,7 +101,7 @@ public class MsgRecv {
         //参数2：是否发送ack包，不发送ack消息会持续在服务端保存，直到收到ack。  可以通过channel.basicAck手动回复ack
         //参数3：消费者
         channel.basicConsume(queueName, false, consumer);
-        //channel.basicGet() //使用该函数主动去服务器检索是否有新消息，而不是等待服务器推送
+//        channel.basicGet(queueName, true); //使用该函数主动去服务器检索是否有新消息，而不是等待服务器推送
 
         while (true) {
             QueueingConsumer.Delivery delivery = consumer.nextDelivery();
