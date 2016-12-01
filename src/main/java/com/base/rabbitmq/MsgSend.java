@@ -45,7 +45,7 @@ public class MsgSend {
         //创建一个频道
         Channel channel = connection.createChannel();
 
-        XT xt = XT.DEFAULT;
+        XT xt = XT.RPC;
 
         String queueName = QUEUE_NAME;
 
