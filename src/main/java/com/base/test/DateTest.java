@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -41,6 +42,16 @@ public class DateTest {
         log.info(beforeNHourToNowDate(-1));
     }
 
+    @Test
+    public void test4() throws ParseException {
+
+        log.info(getShardTime());
+    }
+
+    @Test
+    public void test5() {
+        log.info("date:" + new java.sql.Date(System.currentTimeMillis()));
+    }
 
     /**
      * 获取前N小时的时间
@@ -53,7 +64,28 @@ public class DateTest {
 		/* HOUR_OF_DAY 指示一天中的小时 */
         calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY)
                 - hours);
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return df.format(calendar.getTime());
     }
+
+
+    /**
+     * 获取当前时间
+     * @return
+     */
+    public static String getCreateTime() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = calendar.getTime();
+        String timeCreate  = sdf.format(date);
+        return timeCreate;
+    }
+
+
+    public static java.sql.Date getShardTime() throws ParseException {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date parsed = df.parse(getCreateTime());
+        return new java.sql.Date(parsed.getTime());
+    }
+
 }

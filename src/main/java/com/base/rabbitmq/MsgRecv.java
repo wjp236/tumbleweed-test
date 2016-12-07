@@ -51,10 +51,10 @@ public class MsgRecv {
                 channel.exchangeDeclare(XCHG_NAME, "fanout", true, true, null);
 
                 //声明一个临时队列，该队列会在使用完比后自动销毁
-                queueName = channel.queueDeclare().getQueue();
+//                queueName = channel.queueDeclare().getQueue();
 
                 //声明持久化队列
-                //channel.queueDeclare(queueName, true, false, true, null);
+                channel.queueDeclare(queueName, true, false, true, null);
 
                 //将队列绑定到交换机,参数3无意义此时
                 channel.queueBind(queueName, MsgSend.XCHG_NAME, "");
@@ -99,7 +99,8 @@ public class MsgRecv {
         //参数2：是否发送ack包，不发送ack消息会持续在服务端保存，直到收到ack。  可以通过channel.basicAck手动回复ack
         //参数3：消费者
         channel.basicConsume(queueName, false, consumer);
-//        channel.basicGet(queueName, true); //使用该函数主动去服务器检索是否有新消息，而不是等待服务器推送
+        //channel.basicGet(queueName, true); //使用该函数主动去服务器检索是否有新消息，而不是等待服务器推送
+        //不推荐使用,不断订阅取消订阅,降低2-10倍性能
 
         switch (xt) {
             case RPC:
@@ -110,9 +111,11 @@ public class MsgRecv {
                     AMQP.BasicProperties replyProps = new AMQP.BasicProperties.Builder()
                             .correlationId(props.getCorrelationId()).build();
                     String message = new String(delivery.getBody());
+
                     int n = Integer.parseInt(message);
                     System.out.println("Received " + new String(delivery.getBody()));
                     String response = "" + fib(n);
+
                     channel.basicPublish("", props.getReplyTo(), replyProps, response.getBytes());
                     channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
                 }
