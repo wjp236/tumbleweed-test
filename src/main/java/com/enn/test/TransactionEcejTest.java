@@ -24,6 +24,7 @@ public class TransactionEcejTest {
 
     private static final String localServerUrl = "http://localhost:8080/Transaction";
     private static final String devServerUrl = "http://10.37.148.254:9003/Transaction";
+    private static final String testServerUrl = "http://10.32.32.33:9003/Transaction";
 
     /**
      * 下单
@@ -67,7 +68,7 @@ public class TransactionEcejTest {
 
         String token = "123456";
 
-        String url = devServerUrl + "/" + appId + "/pay/trade";
+        String url = testServerUrl + "/" + appId + "/pay/trade";
 
         log.info(url);
 
