@@ -25,6 +25,8 @@ public class TransactionEcejTest {
     private static final String localServerUrl = "http://localhost:8080/Transaction";
     private static final String devServerUrl = "http://10.37.148.254:9003/Transaction";
     private static final String testServerUrl = "http://10.32.32.33:9003/Transaction";
+    private static final String biztestServerUrl = "http://10.32.15.41:9003/Transaction";
+    private static final String prodServerUrl = "http://inpay.local/Transaction";
 
     /**
      * 下单
@@ -52,23 +54,37 @@ public class TransactionEcejTest {
         tradeParamMap.put("pay_type", "1");
         tradeParamMap.put("client_type", "1");
         // 订单金额
-        tradeParamMap.put("order_amt", "10");
+        tradeParamMap.put("order_amt", "100");
         // 实际交易金额
-        tradeParamMap.put("trade_amt", "10");
+        tradeParamMap.put("trade_amt", "90");
         // 手续费
-        tradeParamMap.put("fee_amt", "");
+        tradeParamMap.put("fee_amt", "0.0");
         // 渠道金额
-        tradeParamMap.put("channel_amt", "30");
+        tradeParamMap.put("channel_amt", "70");
+
+
+        Map<String, String> otherAmt = new HashMap<>();
+        otherAmt.put("balance_amt", "15.00");
+        otherAmt.put("voucher_amt", "5.00");
+        otherAmt.put("voucher_id", "123456789");
+
+
+        Map<String, String> otherAmtWithSign = MD5SignAndValidate.signData(otherAmt, "ecejpay");
+        tradeParamMap.put("other_amt", new Gson().toJson(otherAmtWithSign));
+
+
 
         Map<String, String> tradeParamMapWithSign = MD5SignAndValidate.signData(tradeParamMap, "ecejpay");
 
         String body = new Gson().toJson(tradeParamMapWithSign);
 
+        log.info("body:\n" + body);
+
         String appId = "A99999";
 
         String token = "123456";
 
-        String url = testServerUrl + "/" + appId + "/pay/trade";
+        String url = localServerUrl + "/" + appId + "/pay/trade";
 
         log.info(url);
 
