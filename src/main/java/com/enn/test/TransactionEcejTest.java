@@ -80,11 +80,13 @@ public class TransactionEcejTest {
 
         log.info("body:\n" + body);
 
-        String appId = "A99999";
+        String appId = "inner";
 
         String token = "123456";
 
-        String url = localServerUrl + "/" + appId + "/pay/trade";
+//        String url = testServerUrl + "/" + appId + "/pay/trade";
+
+        String url = "http://localhost:8080" + "/" + appId + "/pay/xinyipay/callBack";
 
         log.info(url);
 
