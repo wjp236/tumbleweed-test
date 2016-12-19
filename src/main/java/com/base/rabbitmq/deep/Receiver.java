@@ -14,12 +14,13 @@ import java.util.concurrent.TimeoutException;
 /**
  * Created by mylover on 29/11/2016.
  */
-public class Receiver extends BaseConnector implements Runnable, Consumer {
+public class Receiver extends BaseConnector implements Consumer {
 
     private final static Logger logger = LogManager.getLogger(Receiver.class);
 
     public Receiver(String queueName) throws IOException, TimeoutException {
         super(queueName);
+        channel.basicConsume(queueName, true, this);
     }
 
     //实现Runnable的run方法

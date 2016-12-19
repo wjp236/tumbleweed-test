@@ -1,5 +1,7 @@
 package com.enn.test;
 
+import com.base.idworder.IPUtils;
+import com.base.idworder.IdWorker;
 import com.enn.model.MerchantBaseRet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,6 +18,7 @@ import java.util.Map;
 public class PaymentTest {
 
     public Logger log = LogManager.getLogger(PaymentTest.class);
+    private static long datacenterId = Long.valueOf(IPUtils.getLocalIp().substring(IPUtils.getLocalIp().length() - 1));
 
     @Test
     public void mchtBaseRetProc() {
@@ -48,6 +51,12 @@ public class PaymentTest {
         gb.disableHtmlEscaping();
 
         return gb.create().toJson(baseRet);
+    }
+
+    @Test
+    public void test() {
+        IdWorker idWorker = new IdWorker(9, datacenterId);
+        System.out.println(idWorker.nextId());
     }
 
 }

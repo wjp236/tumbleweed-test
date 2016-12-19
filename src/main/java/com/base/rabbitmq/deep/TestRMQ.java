@@ -19,8 +19,8 @@ public class TestRMQ {
     public void testMq() throws IOException, TimeoutException, InterruptedException {
 
         Receiver receiver = new Receiver(QUEUE_NAME);
-        Thread receiverThread = new Thread(receiver);
-        receiverThread.start();
+//        Thread receiverThread = new Thread(receiver);
+//        receiverThread.start();
 
         Sender sender = new Sender(QUEUE_NAME);
         for (int i = 0; ; i++) {
