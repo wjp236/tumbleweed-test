@@ -20,7 +20,12 @@ public class Receiver extends BaseConnector implements Consumer {
 
     public Receiver(String queueName) throws IOException, TimeoutException {
         super(queueName);
-        channel.basicConsume(queueName, true, this);
+        try {
+            channel.basicConsume(queueName, true, this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        channel.basicConsume(queueName, true, this);
     }
 
     //实现Runnable的run方法
