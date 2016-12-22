@@ -53,6 +53,7 @@ public class TransactionEcejTest {
         tradeParamMap.put("server_notify_url", "http://localhost:8080");
         tradeParamMap.put("pay_type", "1");
         tradeParamMap.put("client_type", "1");
+        tradeParamMap.put("consume_type", "31");
         // 订单金额
         tradeParamMap.put("order_amt", "100");
         // 实际交易金额
@@ -84,9 +85,9 @@ public class TransactionEcejTest {
 
         String token = "123456";
 
-//        String url = testServerUrl + "/" + appId + "/pay/trade";
+        String url = devServerUrl + "/" + appId + "/pay/trade";
 
-        String url = "http://localhost:8080" + "/" + appId + "/pay/xinyipay/callBack";
+//        String url = "http://localhost:8080" + "/" + appId + "/pay/xinyipay/callBack";
 
         log.info(url);
 
