@@ -3,6 +3,7 @@ package com.enn.test;
 import com.base.common.EncryptUtil;
 import com.enn.common.HttpPostUtil;
 import com.enn.model.XinyipayPo;
+import com.enn.util.DateUtils;
 import com.google.gson.Gson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -164,7 +165,7 @@ public class WebCashEcejTest {
         json.put("req_time","20160428105935");
         String body = json.toString();
         log.info(body);
-        String urlsignature = serverUrl + "/xinyi/make/signature";
+        String urlsignature = proServerUrl + "/xinyi/make/signature";
         String requestBody = HttpPostUtil.sendJSON(urlsignature, body);
 
         String url = proServerUrl + "/pay/queryOrderInfo";
@@ -176,18 +177,18 @@ public class WebCashEcejTest {
         JSONObject json = new JSONObject();
         json.put("merc_id", "8011056811254598983686");
         json.put("salt","123456");
-        json.put("req_time","20161010105935");
-        json.put("trade_no", "124201611040927240000010039936");
-        json.put("merc_refund_no", "anemployee_6399");
-        json.put("refund_amount", "1204.00");
+        json.put("req_time", DateUtils.getCurrentDateTime());
+        json.put("trade_no", "124201609061913410000011088512");
+        json.put("merc_refund_no", "00010142160906000007");
+        json.put("refund_amount", "98.00");
         json.put("currency", "CNY");
-        json.put("receiver_no", "80126913246453700");
+        json.put("receiver_no", "80126913246453768");
 //        json.put("notify_url", serverUrl + "/xinyi/make/signature");
 
         String body = json.toString();
         log.info(body);
 
-        String urlsignature = serverUrl + "/xinyi/make/signature";
+        String urlsignature = proServerUrl + "/xinyi/make/signature";
         String requestBody = HttpPostUtil.sendJSON(urlsignature, body);
 
         String url = proServerUrl + "/pay/refund";
