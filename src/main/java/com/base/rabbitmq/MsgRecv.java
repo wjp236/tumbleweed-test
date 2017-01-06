@@ -13,7 +13,7 @@ public class MsgRecv {
 
     private final static String XCHG_NAME = "xchg_20161029";
 
-    private final static String QUEUE_NAME = "test_queue_20161029";
+    private final static String QUEUE_NAME = "generalConfig_exchange_fanout";
     private final static String USER_PASS = "developer";
     private final static String HOST = "10.37.148.195";
     private final static int POST = 5672;
@@ -38,7 +38,7 @@ public class MsgRecv {
 
         String queueName = QUEUE_NAME;
 
-        XT xt = XT.RPC;
+        XT xt = XT.FANOUT;
 
         switch (xt) {
             case DEFAULT:
@@ -51,10 +51,10 @@ public class MsgRecv {
                 channel.exchangeDeclare(XCHG_NAME, "fanout", true, true, null);
 
                 //声明一个临时队列，该队列会在使用完比后自动销毁
-//                queueName = channel.queueDeclare().getQueue();
+                queueName = channel.queueDeclare().getQueue();
 
                 //声明持久化队列
-                channel.queueDeclare(queueName, true, false, true, null);
+//                channel.queueDeclare(queueName, true, false, true, null);
 
                 //将队列绑定到交换机,参数3无意义此时
                 channel.queueBind(queueName, MsgSend.XCHG_NAME, "");

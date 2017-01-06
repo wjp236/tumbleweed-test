@@ -5,6 +5,7 @@ import com.base.common.Base64;
 import com.base.common.MD5;
 import com.base.common.MD5SignAndValidate;
 import com.base.model.Model;
+import com.base.util.FastJsonUtils;
 import com.yuntongxun.model.CCPAccount;
 import com.yuntongxun.model.PushMessage;
 import com.yuntongxun.model.Response;
@@ -350,6 +351,22 @@ public class JsonTest {
         log.info(json);
 
         Map model1 = JSON.parseObject(json, Map.class);
+
+    }
+
+    @Test
+    public void fastJsonMap() {
+        String msg = "{'ccb_payment_bill_switch':'yes'}";
+        Map<String, String> keysMap = FastJsonUtils.parseObject(msg, Map.class);
+
+        keysMap.put("ccb_payment_bill_switch", "no");
+        keysMap.put("ccb_payment_bill_switch1", "yes");
+
+        Set<Map.Entry<String, String>> set = keysMap.entrySet();
+        for (Iterator<Map.Entry<String, String>> it = set.iterator(); it.hasNext();) {
+            Map.Entry<String, String> entry = it.next();
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+        }
 
     }
 }

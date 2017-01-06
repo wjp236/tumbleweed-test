@@ -1,6 +1,8 @@
 package com.enn.test;
 
+import com.base.common.Base64;
 import com.base.common.HttpPostUtil;
+import com.base.common.MD5;
 import com.enn.util.DateUtil;
 import com.enn.util.DateUtils;
 import com.enn.util.MD5SignAndValidate;
@@ -25,7 +27,7 @@ public class TransactionEcejTest {
     private static final String localServerUrl = "http://localhost:8080/Transaction";
     private static final String devServerUrl = "http://10.37.148.254:9003/Transaction";
     private static final String testServerUrl = "http://10.32.32.33:9003/Transaction";
-    private static final String biztestServerUrl = "http://10.32.15.41:9003/Transaction";
+    private static final String biztestServerUrl = "http://10.32.15.42:8080/Transaction";
     private static final String prodServerUrl = "http://inpay.local/Transaction";
 
     /**
@@ -71,7 +73,7 @@ public class TransactionEcejTest {
 
 
         Map<String, String> otherAmtWithSign = MD5SignAndValidate.signData(otherAmt, "ecejpay");
-        tradeParamMap.put("other_amt", new Gson().toJson(otherAmtWithSign));
+//        tradeParamMap.put("other_amt", new Gson().toJson(otherAmtWithSign));
 
 
 
@@ -81,11 +83,11 @@ public class TransactionEcejTest {
 
         log.info("body:\n" + body);
 
-        String appId = "inner";
+        String appId = "A00001";
 
-        String token = "123456";
+        String token = "ECEJTradingCenterA00001SHJF";
 
-        String url = devServerUrl + "/" + appId + "/pay/trade";
+        String url = prodServerUrl + "/" + appId + "/pay/trade";
 
 //        String url = "http://localhost:8080" + "/" + appId + "/pay/xinyipay/callBack";
 
@@ -98,6 +100,25 @@ public class TransactionEcejTest {
     @Test
     public void sendSms() {
         SMSUtils.sendSms("测试", "18600200156");
+    }
+
+    @Test
+    public void makeSig() throws NoSuchAlgorithmException {
+        String appId = "A99999";
+        String token = "123456";
+        String time = "20170104072256";
+
+        log.info("appId:{},token:{},time:{}",appId, token, time);
+
+
+        String authorization = appId + ":" + time;
+        log.info("\nbase authorization:{}", authorization);
+
+        String sig = appId + token + time;
+        log.info("\nbase sig:{}", sig);
+
+        log.info("\n加密后 authorization:{}", Base64.encodeToString(authorization));
+        log.info("\n加密后 sig:{}", MD5.md5(sig));
     }
 
 }
