@@ -23,7 +23,7 @@ public class RedisTest {
     public void test1() {
 
         Jedis jedis = JedisUtil.createJedis("123.56.228.198", 7000);
-
+        
         jedis.set("k001", "1");
 
         jedis.incrBy("k001", 5);
@@ -42,9 +42,11 @@ public class RedisTest {
 
         JedisCluster jedisCluster = JedisClusterUtils.getJedisCluster();
 
-        jedisCluster.incrByFloat("k001", 1.11);
+        Long test = jedisCluster.decrBy("k00120161111", 1);
 
-        String value = jedisCluster.get("k001");
+        log.info("value:" + test);
+
+        String value = jedisCluster.get("k00120161111");
 
         log.info("value:" + value);
 

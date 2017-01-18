@@ -27,7 +27,7 @@ public class TransactionEcejTest {
     private static final String localServerUrl = "http://localhost:8080/Transaction";
     private static final String devServerUrl = "http://10.37.148.254:9003/Transaction";
     private static final String testServerUrl = "http://10.32.32.33:9003/Transaction";
-    private static final String biztestServerUrl = "http://10.32.15.42:8080/Transaction";
+    private static final String biztestServerUrl = "http://10.32.15.41:8080/Transaction";
     private static final String prodServerUrl = "http://inpay.local/Transaction";
 
     /**
@@ -87,7 +87,41 @@ public class TransactionEcejTest {
 
         String token = "ECEJTradingCenterA00001SHJF";
 
-        String url = prodServerUrl + "/" + appId + "/pay/trade";
+        String url = testServerUrl + "/" + appId + "/pay/trade";
+
+//        String url = "http://localhost:8080" + "/" + appId + "/pay/xinyipay/callBack";
+
+        log.info(url);
+
+        HttpPostUtil.sendJSON(appId, token, url, body);
+
+    }
+
+
+    /**
+     * 查询
+     */
+    @Test
+    public void query() throws IOException, NoSuchAlgorithmException, InterruptedException {
+
+        HashMap<String, String> tradeParamMap = new HashMap<String, String>();
+        tradeParamMap.put("merc_id", "8011056811254598983686");
+        tradeParamMap.put("salt", "123456");
+        tradeParamMap.put("req_time", DateUtils.getCurrentDateTime());
+        tradeParamMap.put("trade_no", "1232017010618906279390208");
+
+
+        Map<String, String> tradeParamMapWithSign = MD5SignAndValidate.signData(tradeParamMap, "ecejpay");
+
+        String body = new Gson().toJson(tradeParamMapWithSign);
+
+        log.info("body:\n" + body);
+
+        String appId = "A00001";
+
+        String token = "ECEJTradingCenterA00001SHJF";
+
+        String url = biztestServerUrl + "/" + appId + "/pay/queryOrderInfo";
 
 //        String url = "http://localhost:8080" + "/" + appId + "/pay/xinyipay/callBack";
 

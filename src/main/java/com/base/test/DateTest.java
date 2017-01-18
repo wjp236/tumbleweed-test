@@ -1,5 +1,6 @@
 package com.base.test;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
@@ -26,6 +27,53 @@ public class DateTest {
         int date3 = Integer.parseInt(lastToday);
         log.info(date3);
     }
+
+    @Test
+    public void testTime() {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+
+        long t = c.getTimeInMillis();
+        log.info(DateFormatUtils.format(c, "yyyyMMddHHmmss"));
+
+        Calendar c1 = Calendar.getInstance();
+        c1.set(Calendar.HOUR_OF_DAY, 1);
+        c1.set(Calendar.MINUTE, 0);
+        c1.set(Calendar.SECOND, 0);
+
+        long t1 = c1.getTimeInMillis();
+        log.info(DateFormatUtils.format(c1, "yyyyMMddHHmmss"));
+
+        log.info((t1 - t) / 1000);
+
+        long t2 = System.currentTimeMillis();
+
+        log.info((((t2 - t)/1000)/60)/60);
+
+    }
+
+    @Test
+    public void testSharding() throws ParseException {
+
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, 1);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        long t = c.getTimeInMillis();
+        long now = System.currentTimeMillis();
+        if ((now - t) > 0) {
+            log.info(now -t);
+            log.info("true");
+        }
+        SimpleDateFormat dfParse = new SimpleDateFormat("yyyy-MM-dd");
+
+        log.info(dfParse.format(new Date()));
+
+    }
+
+
 
     @Test
     public void test1() {
@@ -80,6 +128,8 @@ public class DateTest {
         String timeCreate  = sdf.format(date);
         return timeCreate;
     }
+
+
 
 
     public static java.sql.Date getShardTime() throws ParseException {

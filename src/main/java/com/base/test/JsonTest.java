@@ -362,6 +362,10 @@ public class JsonTest {
         keysMap.put("ccb_payment_bill_switch", "no");
         keysMap.put("ccb_payment_bill_switch1", "yes");
 
+        Object obj = keysMap;
+
+        log.info("\ncome on:" + FastJsonUtils.toJSONString(obj));
+
         Set<Map.Entry<String, String>> set = keysMap.entrySet();
         for (Iterator<Map.Entry<String, String>> it = set.iterator(); it.hasNext();) {
             Map.Entry<String, String> entry = it.next();
