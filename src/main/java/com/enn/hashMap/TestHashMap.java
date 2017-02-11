@@ -17,7 +17,7 @@ public class TestHashMap {
     public void testHashMap() {
         long t1 = System.currentTimeMillis();
         Map<String, String> map = new HashMap<>();
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 10; i++) {
             map.put("k" + i, "v" + i);
         }
         long t2 = System.currentTimeMillis();
