@@ -1,18 +1,12 @@
 package com.base.test;
 
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 public class SystemTest {
 
-    @org.junit.Test
-    public void test() throws NoSuchAlgorithmException, IOException {
-        String test = System.getProperty("user.dir");
-//        System.out.print(test);
-    }
-
-    @org.junit.Test
-    public void test1() {
+    public static void main(String[] args) {
         int a = 10;
         int b = 10;
         method(a, b);//打印a:100,b:200
@@ -21,10 +15,22 @@ public class SystemTest {
         System.out.println("b=" + b);
     }
 
-    private void method(int a, int b) {
-//        System.out.println("a=100,b=200");
-//        System.exit(0);
+    private static void method(int a, int b) {
 
+        Map<Thread, StackTraceElement[]> elements = Thread.currentThread().getAllStackTraces();
+
+        Set<Map.Entry<Thread, StackTraceElement[]>> set = elements.entrySet();
+        for (Iterator<Map.Entry<Thread, StackTraceElement[]>> it = set.iterator(); it.hasNext();) {
+            Map.Entry<Thread, StackTraceElement[]> entry = it.next();
+            System.out.println(entry.getKey());
+            for (StackTraceElement stackTraceElement : entry.getValue()) {
+                System.out.print(stackTraceElement.getClass() + "\t");
+                System.out.print(stackTraceElement.getClassName() + "\t");
+                System.out.print(stackTraceElement.getFileName() + "\t");
+                System.out.print(stackTraceElement.getLineNumber() + "\t");
+                System.out.print(stackTraceElement.getMethodName() + "\t\n");
+            }
+        }
     }
 
 }

@@ -1,7 +1,7 @@
 package com.base.test;
 
 /**
- * 描述:
+ * 描述:字典树
  *
  * @author: mylover
  * @Time: 08/02/2017.
