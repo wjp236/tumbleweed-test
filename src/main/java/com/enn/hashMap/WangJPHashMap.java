@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 描述:
+ * 描述:hashMap实现
  *
  * @author: mylover
  * @Time: 10/02/2017.

@@ -1,7 +1,7 @@
 package com.enn.hashMap;
 
 /**
- * 描述:
+ * 描述:接口类
  *
  * @author: mylover
  * @Time: 10/02/2017.
