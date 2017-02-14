@@ -9,7 +9,6 @@
     </Properties>
     <Loggers>
         <Root level="INFO">
-            <AppenderRef ref="console"/>
             <AppenderRef ref="busiess"/>
             <AppenderRef ref="error_log"/>
         </Root>

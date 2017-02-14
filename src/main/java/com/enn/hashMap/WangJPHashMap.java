@@ -65,7 +65,7 @@ public class WangJPHashMap<K, V> implements WangJPMap<K, V> {
     }
 
     /**
-     * 重新三略
+     * 重新散列
      * @param newTable
      */
     private void againstHash(Entry<K, V>[] newTable) {

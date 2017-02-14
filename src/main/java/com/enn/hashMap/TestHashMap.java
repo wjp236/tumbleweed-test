@@ -38,8 +38,24 @@ public class TestHashMap {
 //        for (int i = 0; i < 1000; i++) {
 //            System.out.println("key:" + "k" + i + ", value:" + map.get("k" + i));
 //        }
+    }
+
+    @Test
+    public void testHashCode() {
 
 
+        HashMap map1 = new HashMap();
+        map1.put("test", "testValue");
+        map1.put("test1", "testValue1");
+        map1.put("test2", "testValue2");
+
+        HashMap map2 = new HashMap();
+        map2.put("test", "testValue");
+        map2.put("test1", "testValue1");
+        map2.put("test2", "testValue2");
+        
+        System.out.println(map1.hashCode());
+        System.out.println(map2.hashCode());
     }
 
 }
