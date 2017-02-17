@@ -19,8 +19,6 @@ public class Wangjp implements People {
     @Override
     public void sleep() throws Throwable {
 
-
-
     }
 
     @Override
