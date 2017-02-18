@@ -12,7 +12,7 @@
 
         <junit.version>4.11</junit.version>
         <ant.version>1.9.4</ant.version>
-        <spring.version>4.1.7.RELEASE</spring.version>
+        <spring.version>4.3.6.RELEASE</spring.version>
         <slf4j.version>1.7.7</slf4j.version>
         <logback.version>1.1.2</logback.version>
         <log4j2.version>2.6.1</log4j2.version>
@@ -266,28 +266,28 @@
         <!--httpclient-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
-            <version>4.4.3</version>
+            <version>4.4.6</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
-            <version>4.5.1</version>
+            <version>4.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient-cache</artifactId>
-            <version>4.5.1</version>
+            <version>4.5.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>fluent-hc</artifactId>
-            <version>4.5.1</version>
+            <version>4.5.3</version>
         </dependency>
         <dependency>
             <groupId>commons-httpclient</groupId>
@@ -431,35 +431,11 @@
     </build>
     <repositories>
         <repository>
-            <id>central</id>
-            <name>Maven Central</name>
-            <url>http://repo.maven.apache.org/maven2</url>
+            <id>public</id>
+            <name>public</name>
+            <url>http://123.56.228.198:9903/nexus/content/groups/public</url>
             <releases>
                 <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-                <updatePolicy>never</updatePolicy>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>sonatype-nexus-releases</id>
-            <name>Sonatype Nexus releases</name>
-            <url>https://oss.sonatype.org/content/repositories/releases</url>
-            <releases>
-                <enabled>false</enabled>
             </releases>
             <snapshots>
                 <enabled>true</enabled>
