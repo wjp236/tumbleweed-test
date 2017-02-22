@@ -184,7 +184,7 @@ public class WebCashEcejTest {
         JSONObject json = new JSONObject();
         json.put("salt","123456");
         json.put("merc_id", "8011056811254598983686");
-        json.put("trade_no", "124201702221523090000011154048");
+        json.put("trade_no", "124201702221722320000010105472");
         json.put("req_time","20160428105935");
         String body = json.toString();
         log.info(body);
