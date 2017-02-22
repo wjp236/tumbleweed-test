@@ -4,14 +4,14 @@ import com.base.common.EncryptUtil;
 import com.enn.common.HttpPostUtil;
 import com.enn.model.XinyipayPo;
 import com.enn.util.DateUtils;
+import com.enn.util.ShardTimeUtil;
 import com.google.gson.Gson;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.io.SAXReader;
 import org.json.JSONObject;
 import org.junit.Test;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import java.util.Date;
  */
 public class WebCashEcejTest {
 
-    public Logger log = LogManager.getLogger(WebCashEcejTest.class);
+    private static org.slf4j.Logger log = LoggerFactory.getLogger(WebCashEcejTest.class);
 
     private static final String localServerUrl = "http://localhost:8080/webCash";
     private static final String serverUrl = "http://222.222.120.75:8081/webCash-core/webCash";
@@ -82,17 +82,17 @@ public class WebCashEcejTest {
         json.put("salt", "000000");
         json.put("req_ip", "127.0.0.1");
         json.put("biz_type", "GOODS");
-        json.put("trade_amt", "1.0");
+        json.put("trade_amt", "0.0");
         json.put("trade_desc", "篮球");
         json.put("req_time",    "20161117000000");
-        json.put("time_expire", "20161117234500");
+        json.put("time_expire", "20170222234500");
         json.put("trade_mode", "GUARANTEEPAY");
         json.put("trade_detail", "秘制篮球");
         json.put("currency", "CNY");
         json.put("pay_type", "APP");
         json.put("merc_order_no", "20160624062822");
         json.put("attach", "userdata");
-        json.put("receive_no", "80126914620088320");//10:801108198899916808 //9:80126913246453768 测试:80126914620088320
+        json.put("receive_no", "80126913246453768");//10:801108198899916808 //9:80126913246453768 测试:80126914620088320
         json.put("notify_url", "http://10.37.148.254:9022/webCash-core/webCash/xinyi/make/metCallBack");
         json.put("pay_type", "APP");
         json.put("cashAmt", "3.0");
@@ -102,7 +102,7 @@ public class WebCashEcejTest {
 
         String body = json.toString();
 
-        String urlsignature = biztestServerUrl + "/xinyi/make/signature";
+        String urlsignature = testServerUrlYun + "/xinyi/make/signature";
 
         String requestBody = HttpPostUtil.sendJSON(urlsignature, body);
 
@@ -118,6 +118,11 @@ public class WebCashEcejTest {
 
     }
 
+    @Test
+    public void shardTest() throws Exception {
+        log.info(ShardTimeUtil.formatShardingTime(ShardTimeUtil.fromTradeNo("124201702221419540000012202624")));
+    }
+
     /**
      * 唤起收银台签名
      */
@@ -126,11 +131,11 @@ public class WebCashEcejTest {
         JSONObject json = new JSONObject();
         json.put("salt","123456");
         json.put("merc_id", "8011056811254598983686");
-        json.put("trade_no", "124201611171535560000010072704");
+        json.put("trade_no", "124201702221445590000013251200");
         json.put("req_time","20160428105935");
         json.put("appid", "A000001");
-        json.put("tradeChannel", "WX");
-        log.info(json);
+        json.put("tradeChannel", "ZFB");
+        log.info(json.toString());
 
         String body = json.toString();
         String url = testServerUrlYun + "/xinyi/make/signature";
@@ -145,14 +150,14 @@ public class WebCashEcejTest {
         JSONObject json = new JSONObject();
         json.put("salt","123456");
         json.put("merc_id", "8011056811254598983686");
-        json.put("trade_no", "124201609231412470000013283968");
+        json.put("trade_no", "124201702221454200000010105472");
         json.put("req_time","20160428105935");
         String body = json.toString();
         log.info(body);
-        String urlsignature = serverUrl + "/xinyi/make/signature";
+        String urlsignature = testServerUrlYun + "/xinyi/make/signature";
         String requestBody = HttpPostUtil.sendJSON(urlsignature, body);
 
-        String url = serverUrl + "/pay/accounting";
+        String url = testServerUrlYun + "/pay/accounting";
         HttpPostUtil.sendJSON(url, requestBody);
     }
 
@@ -161,14 +166,14 @@ public class WebCashEcejTest {
         JSONObject json = new JSONObject();
         json.put("salt","123456");
         json.put("merc_id", "8011056811254598983686");
-        json.put("trade_no", "124201610171520110000013185664");
+        json.put("trade_no", "124201702221454200000010105472");
         json.put("req_time","20160428105935");
         String body = json.toString();
         log.info(body);
-        String urlsignature = proServerUrl + "/xinyi/make/signature";
+        String urlsignature = testServerUrlYun + "/xinyi/make/signature";
         String requestBody = HttpPostUtil.sendJSON(urlsignature, body);
 
-        String url = proServerUrl + "/pay/queryOrderInfo";
+        String url = testServerUrlYun + "/pay/queryOrderInfo";
         HttpPostUtil.sendJSON(url, requestBody);
     }
 
@@ -178,20 +183,20 @@ public class WebCashEcejTest {
         json.put("merc_id", "8011056811254598983686");
         json.put("salt","123456");
         json.put("req_time", DateUtils.getCurrentDateTime());
-        json.put("trade_no", "124201609061913410000011088512");
-        json.put("merc_refund_no", "00010142160906000007");
-        json.put("refund_amount", "98.00");
+        json.put("trade_no", "124201702181253400000010039936");
+        json.put("merc_refund_no", "WECHAT4518600000000222337");
+        json.put("refund_amount", "3.00");
         json.put("currency", "CNY");
-        json.put("receiver_no", "80126913246453768");
+        json.put("receiver_no", "80159357405224962");
 //        json.put("notify_url", serverUrl + "/xinyi/make/signature");
 
         String body = json.toString();
         log.info(body);
 
-        String urlsignature = proServerUrl + "/xinyi/make/signature";
+        String urlsignature = testServerUrlYun + "/xinyi/make/signature";
         String requestBody = HttpPostUtil.sendJSON(urlsignature, body);
 
-        String url = proServerUrl + "/pay/refund";
+        String url = testServerUrlYun + "/pay/refund";
         HttpPostUtil.sendJSON(url, requestBody);
 
     }

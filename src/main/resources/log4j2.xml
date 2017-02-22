@@ -9,37 +9,17 @@
     </Properties>
     <Loggers>
         <Root level="INFO">
+            <AppenderRef ref="console"/>
             <AppenderRef ref="busiess"/>
             <AppenderRef ref="error_log"/>
         </Root>
-        <Logger name="org.springframework" level="error" additivity="false">
-            <AppenderRef ref="busiess"/>
-            <AppenderRef ref="console"/>
-        </Logger>
-        <Logger name="net.sf.ezmorph.bean.BeanMorpher" level="error" additivity="false">
-            <AppenderRef ref="busiess"/>
-            <AppenderRef ref="console"/>
-        </Logger>
-        <Logger name="net.sf.json.JSONObject" level="error" additivity="false">
-            <AppenderRef ref="busiess"/>
-            <AppenderRef ref="console"/>
-        </Logger>
-        <Logger name="org.apache.zookeeper" level="error" additivity="false">
-            <AppenderRef ref="busiess"/>
-            <AppenderRef ref="console"/>
-        </Logger>
-        <Logger name="com.alibaba.dubbo.remoting" level="error" additivity="false">
-            <AppenderRef ref="busiess"/>
-            <AppenderRef ref="console"/>
-        </Logger>
-        <Logger name="com.alibaba.dubbo.monitor" level="error" additivity="false">
-            <AppenderRef ref="error_log"/>
-            <AppenderRef ref="console"/>
-        </Logger>
-        <Logger name="org.apache.commons" level="error" additivity="false">
-            <AppenderRef ref="error_log"/>
-            <AppenderRef ref="console"/>
-        </Logger>
+        <Logger name="org.springframework" level="error" additivity="false"/>
+        <Logger name="net.sf.ezmorph.bean.BeanMorpher" level="error" additivity="false"/>
+        <Logger name="net.sf.json.JSONObject" level="error" additivity="false"/>
+        <Logger name="org.apache.zookeeper" level="error" additivity="false"/>
+        <Logger name="com.alibaba.dubbo.remoting" level="error" additivity="false"/>
+        <Logger name="com.alibaba.dubbo.monitor" level="error" additivity="false"/>
+        <Logger name="org.apache.commons" level="error" additivity="false"/>
     </Loggers>
     <Appenders>
         <Console name="console" target="SYSTEM_OUT">
