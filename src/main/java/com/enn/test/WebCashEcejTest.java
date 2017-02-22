@@ -95,7 +95,7 @@ public class WebCashEcejTest {
         json.put("receive_no", "80126913246453768");//10:801108198899916808 //9:80126913246453768 测试:80126914620088320
         json.put("notify_url", "http://10.37.148.254:9022/webCash-core/webCash/xinyi/make/metCallBack");
         json.put("pay_type", "APP");
-        json.put("cashAmt", "3.0");
+        json.put("cashAmt", "0.0");
         json.put("priAmt", "2.0");
         json.put("packAmt", "1.0");
         json.put("feeAmt", "0.02");
@@ -150,7 +150,7 @@ public class WebCashEcejTest {
         JSONObject json = new JSONObject();
         json.put("salt","123456");
         json.put("merc_id", "8011056811254598983686");
-        json.put("trade_no", "124201702221454200000010105472");
+        json.put("trade_no", "124201702221523090000011154048");
         json.put("req_time","20160428105935");
         String body = json.toString();
         log.info(body);
@@ -166,7 +166,7 @@ public class WebCashEcejTest {
         JSONObject json = new JSONObject();
         json.put("salt","123456");
         json.put("merc_id", "8011056811254598983686");
-        json.put("trade_no", "124201702221454200000010105472");
+        json.put("trade_no", "124201702221523090000011154048");
         json.put("req_time","20160428105935");
         String body = json.toString();
         log.info(body);
