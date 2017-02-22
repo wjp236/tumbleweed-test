@@ -146,6 +146,24 @@ public class WebCashEcejTest {
     }
 
     @Test
+    public void closeOrder() throws IOException, NoSuchAlgorithmException {
+        JSONObject json = new JSONObject();
+        json.put("salt","123456");
+        json.put("merc_id", "8011056811254598983686");
+        json.put("trade_no", "124201702221445590000013251200");
+        json.put("req_time","20160428105935");
+        json.put("merc_order_no", "00027385170222000001");
+        log.info(json.toString());
+
+        String body = json.toString();
+        String url = testServerUrlYun + "/xinyi/make/signature";
+        String requestBody = HttpPostUtil.sendJSON(url, body);
+
+        String callUrl = testServerUrlYun + "/pay/closeOrder";
+        HttpPostUtil.sendJSON(callUrl, requestBody);
+    }
+
+    @Test
     public void account() throws IOException, NoSuchAlgorithmException {
         JSONObject json = new JSONObject();
         json.put("salt","123456");
