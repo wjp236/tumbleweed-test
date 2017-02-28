@@ -8,9 +8,9 @@ import com.enn.util.DateUtils;
 import com.enn.util.MD5SignAndValidate;
 import com.enn.util.SMSUtils;
 import com.google.gson.Gson;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class TransactionEcejTest {
 
-    public Logger log = LogManager.getLogger(TransactionEcejTest.class);
+    private final static Logger log = LoggerFactory.getLogger(WebCashEcejTest.class);
 
     private static final String localServerUrl = "http://localhost:8080/Transaction";
     private static final String devServerUrl = "http://10.37.148.254:9003/Transaction";
