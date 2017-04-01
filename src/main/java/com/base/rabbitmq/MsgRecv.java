@@ -14,8 +14,8 @@ public class MsgRecv {
     private final static String XCHG_NAME = "xchg_20161029";
 
     private final static String QUEUE_NAME = "generalConfig_exchange_fanout";
-    private final static String USER_PASS = "developer";
-    private final static String HOST = "10.37.148.195";
+    private final static String USER_PASS = "rabbitadmin";
+    private final static String HOST = "172.16.254.224";
     private final static int POST = 5672;
 
     public enum XT {
@@ -31,14 +31,14 @@ public class MsgRecv {
         factory.setPort(POST);
 
         factory.setUsername(USER_PASS);
-        factory.setPassword(USER_PASS);
+        factory.setPassword("123456");
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
         String queueName = QUEUE_NAME;
 
-        XT xt = XT.FANOUT;
+        XT xt = XT.DEFAULT;
 
         switch (xt) {
             case DEFAULT:

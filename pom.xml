@@ -401,6 +401,11 @@
             <artifactId>bson</artifactId>
             <version>3.4.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.pay.platform.trunk</groupId>
+            <artifactId>pay-sdk</artifactId>
+            <version>1.0.0.RELEASE</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -440,7 +445,7 @@
     <repositories>
         <repository>
             <id>public</id>
-            <name>public</name>
+            <name>Public</name>
             <url>http://123.56.228.198:9903/nexus/content/groups/public</url>
             <releases>
                 <enabled>true</enabled>

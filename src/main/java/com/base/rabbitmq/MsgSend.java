@@ -14,8 +14,8 @@ import java.util.concurrent.TimeoutException;
 public class MsgSend {
 
     private final static String QUEUE_NAME = "test_queue_20161029";
-    private final static String USER_PASS = "developer";
-    private final static String HOST = "10.37.148.195";
+    private final static String USER_PASS = "rabbitadmin";
+    private final static String HOST = "172.16.254.224";
     private final static int POST = 5672;
 
     private static Scanner scanner = new Scanner(System.in);
@@ -38,14 +38,14 @@ public class MsgSend {
         factory.setPort(POST);
 
         factory.setUsername(USER_PASS);
-        factory.setPassword(USER_PASS);
+        factory.setPassword("123456");
 
         //创建一个连接
         Connection connection = factory.newConnection();
         //创建一个频道
         Channel channel = connection.createChannel();
 
-        XT xt = XT.FANOUT;
+        XT xt = XT.DEFAULT;
 
         String queueName = QUEUE_NAME;
 
