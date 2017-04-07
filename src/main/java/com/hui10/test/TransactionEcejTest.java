@@ -1,12 +1,10 @@
-package com.enn.test;
+package com.hui10.test;
 
-import com.base.common.Base64;
 import com.base.common.HttpPostUtil;
-import com.base.common.MD5;
+import com.enn.test.WebCashEcejTest;
 import com.enn.util.DateUtil;
 import com.enn.util.DateUtils;
 import com.enn.util.MD5SignAndValidate;
-import com.enn.util.SMSUtils;
 import com.google.gson.Gson;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -24,8 +22,8 @@ public class TransactionEcejTest {
 
     private final static Logger log = LoggerFactory.getLogger(WebCashEcejTest.class);
 
-    private static final String localServerUrl = "http://localhost:8080/Transaction";
-    private static final String devServerUrl = "http://10.37.148.254:9003/webCash";
+    private static final String localServerUrl = "http://localhost:8080/webCash";
+    private static final String devServerUrl = "http://172.16.254.222:9022/webCash";
     private static final String testServerUrl = "http://10.32.32.33:9003/webCash";
     private static final String biztestServerUrl = "http://10.32.15.41:8080/Transaction";
     private static final String prodServerUrl = "http://inpay.local/Transaction";
@@ -56,14 +54,6 @@ public class TransactionEcejTest {
         tradeParamMap.put("pay_type", "1");
         tradeParamMap.put("client_type", "1");
         tradeParamMap.put("consume_type", "31");
-        // 订单金额
-        tradeParamMap.put("order_amt", "100");
-        // 实际交易金额
-        tradeParamMap.put("trade_amt", "90");
-        // 手续费
-        tradeParamMap.put("fee_amt", "0.0");
-        // 渠道金额
-        tradeParamMap.put("channel_amt", "70");
 
 
         Map<String, String> otherAmt = new HashMap<>();
@@ -83,76 +73,18 @@ public class TransactionEcejTest {
 
         log.info("body:\n" + body);
 
-        String appId = "A00001";
-
-        String token = "ECEJTradingCenterA00001SHJF";
-
-        String url = testServerUrl + "/" + appId + "/pay/trade";
-
-//        String url = "http://localhost:8080" + "/" + appId + "/pay/xinyipay/callBack";
-
-        log.info(url);
-
-        HttpPostUtil.sendJSON(appId, token, url, body);
-
-    }
-
-
-    /**
-     * 查询
-     */
-    @Test
-    public void query() throws IOException, NoSuchAlgorithmException, InterruptedException {
-
-        HashMap<String, String> tradeParamMap = new HashMap<String, String>();
-        tradeParamMap.put("merc_id", "8011056811254598983686");
-        tradeParamMap.put("salt", "123456");
-        tradeParamMap.put("req_time", DateUtils.getCurrentDateTime());
-        tradeParamMap.put("trade_no", "1232017010618906279390208");
-
-
-        Map<String, String> tradeParamMapWithSign = MD5SignAndValidate.signData(tradeParamMap, "ecejpay");
-
-        String body = new Gson().toJson(tradeParamMapWithSign);
-
-        log.info("body:\n" + body);
-
-        String appId = "A00001";
-
-        String token = "ECEJTradingCenterA00001SHJF";
-
-        String url = biztestServerUrl + "/" + appId + "/pay/queryOrderInfo";
-
-//        String url = "http://localhost:8080" + "/" + appId + "/pay/xinyipay/callBack";
-
-        log.info(url);
-
-        HttpPostUtil.sendJSON(appId, token, url, body);
-
-    }
-
-    @Test
-    public void sendSms() {
-        SMSUtils.sendSms("测试", "18600200156");
-    }
-
-    @Test
-    public void makeSig() throws NoSuchAlgorithmException {
         String appId = "A99999";
+
         String token = "123456";
-        String time = "20170104072256";
 
-        log.info("appId:{},token:{},time:{}",appId, token, time);
+        String url = localServerUrl + "/" + appId + "/pay/unifiedOrder";
 
+//        String url = "http://localhost:8080" + "/" + appId + "/pay/xinyipay/callBack";
 
-        String authorization = appId + ":" + time;
-        log.info("\nbase authorization:{}", authorization);
+        log.info(url);
 
-        String sig = appId + token + time;
-        log.info("\nbase sig:{}", sig);
+        HttpPostUtil.sendJSON(appId, token, url, body);
 
-        log.info("\n加密后 authorization:{}", Base64.encodeToString(authorization));
-        log.info("\n加密后 sig:{}", MD5.md5(sig));
     }
 
 }
