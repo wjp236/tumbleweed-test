@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sdoroot package_type="iso8583" store-mode="GBK">
+    <H1 type="string" length="1" isHeader="true" encoding="GBK" isBCD="true"/>
+    <H2 type="string" length="1" isHeader="true" encoding="GBK" isBCD="true"/>
+    <H3 type="string" length="4" isHeader="true" encoding="GBK"/>
+    <H4 type="string" length="11" isHeader="true" encoding="GBK"/>
+    <H5 type="string" length="11" isHeader="true" encoding="GBK"/>
+    <H6 type="string" length="3" isHeader="true" encoding="GBK" isBCD="true"/>
+    <H7 type="string" length="1" isHeader="true" encoding="GBK" isBCD="true"/>
+    <H8 type="string" length="8" isHeader="true" encoding="GBK"/>
+    <H9 type="string" length="1" isHeader="true" encoding="GBK" isBCD="true"/>
+    <MsgType type="string" length="4" encoding="GBK"/>
+    <bitmap1 length="8" type="bitmap"/>
+    <bitmap2 length="8" type="bitmap"/>
+    <F2 type="string" length="19" variable_flag="2" field_index="2" encoding="GBK"/>
+    <F3 type="string" length="6" field_index="3" encoding="GBK"/>
+    <F4 type="string" length="12" field_index="4" encoding="GBK"/>
+    <F6 type="string" length="12" field_index="6" encoding="GBK"/>
+    <F7 type="string" length="10" field_index="7" encoding="GBK"/>
+    <F10 type="string" length="8" field_index="10" encoding="GBK"/>
+    <F11 type="string" length="6" field_index="11" encoding="GBK"/>
+    <F12 type="string" length="6" field_index="12" encoding="GBK"/>
+    <F13 type="string" length="4" field_index="13" encoding="GBK"/>
+    <F14 type="string" length="4" field_index="14" encoding="GBK"/>
+    <F15 type="string" length="4" field_index="15" encoding="GBK"/>
+    <F18 type="string" length="4" field_index="18" encoding="GBK"/>
+    <F22 type="string" length="3" field_index="22" encoding="GBK"/>
+    <F23 type="string" length="3" field_index="23" encoding="GBK"/>
+    <F25 type="string" length="2" field_index="25" encoding="GBK"/>
+    <F26 type="string" length="2" field_index="26" encoding="GBK"/>
+    <F28 type="string" length="9" field_index="28" encoding="GBK"/>
+    <F32 type="string" length="11" variable_flag="2" field_index="32" encoding="GBK"/>
+    <F33 type="string" length="11" variable_flag="2" field_index="33" encoding="GBK"/>
+    <F35 type="string" length="37" variable_flag="2" field_index="35" encoding="GBK"/>
+    <F36 type="string" length="104" variable_flag="3" field_index="36" encoding="GBK"/>
+    <F37 type="string" length="12" field_index="37" encoding="GBK"/>
+    <F38 type="string" length="6" field_index="38" encoding="GBK"/>
+    <F39 type="string" length="2" field_index="39" encoding="GBK"/>
+    <F41 type="string" length="8" field_index="41" encoding="GBK"/>
+    <F42 type="string" length="15" field_index="42" encoding="GBK"/>
+    <F43 type="string" length="40" field_index="43" encoding="GBK"/>
+    <F44 type="string" length="25" variable_flag="2" field_index="44" encoding="GBK"/>
+    <F47 type="string" length="100" variable_flag="3" field_index="47" encoding="GBK"/>
+    <F48 type="string" length="400" variable_flag="3" field_index="48" encoding="GBK"/>
+    <F49 type="string" length="3" field_index="49" encoding="GBK"/>
+    <F51 type="string" length="3" field_index="51" encoding="GBK"/>
+    <F52 type="string" length="8" field_index="52" encoding="GBK"/>
+    <F53 type="string" length="16" field_index="53" encoding="GBK"/>
+    <F54 type="string" length="40" variable_flag="3" field_index="54" encoding="GBK"/>
+    <F55 type="string" length="300" variable_flag="3" field_index="55" encoding="GBK"/>
+    <F57 type="string" length="100" variable_flag="3" field_index="57" encoding="GBK"/>
+    <F60 type="string" length="100" variable_flag="3" field_index="60" encoding="GBK"/>
+    <F61 type="string" length="200" variable_flag="3" field_index="61" encoding="GBK"/>
+    <F62 type="string" length="200" variable_flag="3" field_index="62" encoding="GBK"/>
+    <F70 type="string" length="3" field_index="70" encoding="GBK"/>
+    <F90 type="string" length="42" field_index="90" encoding="GBK"/>
+    <F91 type="string" length="1" field_index="91" encoding="GBK"/>
+    <F96 type="string" length="8" field_index="96" encoding="GBK"/>
+    <F100 type="string" length="11" variable_flag="2" field_index="100" encoding="GBK"/>
+    <F102 type="string" length="32" variable_flag="2" field_index="102" encoding="GBK"/>
+    <F103 type="string" length="32" variable_flag="2" field_index="103" encoding="GBK"/>
+    <F108 type="string" length="32" variable_flag="3" field_index="108" encoding="GBK"/>
+    <F121 type="string" length="100" variable_flag="3" field_index="121" encoding="GBK"/>
+    <F122 type="string" length="50" variable_flag="3" field_index="122" encoding="GBK"/>
+    <F123 type="string" length="400" variable_flag="3" field_index="123" encoding="GBK"/>
+    <F128 type="string" length="8" field_index="128" encoding="GBK"/>
+</sdoroot>
