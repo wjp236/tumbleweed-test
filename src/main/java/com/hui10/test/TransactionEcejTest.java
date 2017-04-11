@@ -67,7 +67,7 @@ public class TransactionEcejTest {
 
 
 
-        Map<String, String> tradeParamMapWithSign = MD5SignAndValidate.signData(tradeParamMap, "ecejpay");
+        Map<String, String> tradeParamMapWithSign = MD5SignAndValidate.signData(tradeParamMap, "123456");
 
         String body = new Gson().toJson(tradeParamMapWithSign);
 

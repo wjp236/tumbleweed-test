@@ -140,7 +140,7 @@ public class TransactionEcejTest {
     public void makeSig() throws NoSuchAlgorithmException {
         String appId = "A99999";
         String token = "123456";
-        String time = "20170104072256";
+        String time = DateUtils.getCurrentDateTime();
 
         log.info("appId:{},token:{},time:{}",appId, token, time);
 
