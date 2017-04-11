@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Created by mylover on 4/9/16.
  */
-public class TransactionEcejTest {
+public class Hui10PayTest {
 
     private final static Logger log = LoggerFactory.getLogger(WebCashEcejTest.class);
 
@@ -62,7 +62,7 @@ public class TransactionEcejTest {
         otherAmt.put("voucher_id", "123456789");
 
 
-        Map<String, String> otherAmtWithSign = MD5SignAndValidate.signData(otherAmt, "ecejpay");
+        Map<String, String> otherAmtWithSign = MD5SignAndValidate.signData(otherAmt, "A99999");
 //        tradeParamMap.put("other_amt", new Gson().toJson(otherAmtWithSign));
 
 
@@ -77,7 +77,7 @@ public class TransactionEcejTest {
 
         String token = "123456";
 
-        String url = localServerUrl + "/" + appId + "/pay/unifiedOrder";
+        String url = devServerUrl + "/" + appId + "/pay/unifiedOrder";
 
 //        String url = "http://localhost:8080" + "/" + appId + "/pay/xinyipay/callBack";
 
@@ -85,6 +85,32 @@ public class TransactionEcejTest {
 
         HttpPostUtil.sendJSON(appId, token, url, body);
 
+    }
+
+    @Test
+    public void signData() throws IOException, NoSuchAlgorithmException {
+        String body = "{\n" +
+                "    \"salt\": \"123456\", \n" +
+                "    \"merc_id\": \"8011056811254598983686\", \n" +
+                "    \"req_ip\": \"123.12.12.123\", \n" +
+                "    \"sub_merc_id\": \"80126913246453768\", \n" +
+                "    \"trade_amt\": \"0.01\", \n" +
+                "    \"trade_desc\": \"dasdasd\", \n" +
+                "    \"server_notify_url\": \"http://172.16.0.184:8080/inner/make/metCallBack\", \n" +
+                "    \"trade_detail\": \"asdasdasd\", \n" +
+                "    \"currency\": \"CNY\", \n" +
+                "    \"merc_order_no\": \"20170411110101\", \n" +
+                "    \"req_time\": \"20170411093824\"\n" +
+                "}";
+        String urlsignature = "http://172.16.254.222:9022/inner/A99999/make/signature";
+
+        String appId = "A99999";
+
+        String token = "123456";
+
+        String requestBody = HttpPostUtil.sendJSON(appId, token, urlsignature, body);
+
+        log.info(requestBody);
     }
 
 }
