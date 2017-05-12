@@ -37,6 +37,17 @@ public class Test {
     }
 
     @org.junit.Test
+    public void test2() {
+        TestInteger testInteger = new TestInteger();
+        testInteger.setI(2);
+
+        int i = testInteger.getI();
+        if (i == 2) {
+            log.info("true");
+        }
+    }
+
+    @org.junit.Test
     public void test1() throws NoSuchAlgorithmException {
         String mainAccout = "";
         String token = "";
@@ -76,4 +87,16 @@ public class Test {
         log.info("状态:" + status + ";\n返回包体:" + conResult);
     }
 
+}
+
+class TestInteger {
+    private Integer i;
+
+    public Integer getI() {
+        return i;
+    }
+
+    public void setI(Integer i) {
+        this.i = i;
+    }
 }

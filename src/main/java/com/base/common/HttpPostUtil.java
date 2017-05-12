@@ -91,10 +91,8 @@ public class HttpPostUtil {
         String conResult = EntityUtils.toString(httpresponse.getEntity());
         StatusLine statusLine = httpresponse.getStatusLine();
         int status = statusLine.getStatusCode();
-
         logger.info("\n\n\n\n状态:" + status + ";返回包体:" + conResult);
-
         return "status=" + status + ";conResult=" + conResult;
-
+//        return null;
     }
 }

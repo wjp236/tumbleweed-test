@@ -1,6 +1,6 @@
 package com.base.test;
 
-import com.base.common.MD5;
+import com.base.common.*;
 import net.sf.json.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +27,37 @@ public class StringTest {
         String sig = "_";
         sig = MD5.md5(sig);
         log.info(sig);
+    }
+
+    @Test
+    public void test7() {
+        String body = "adcdefghijklmnopqlstuvwlyz:123456";
+        String[] bodyArrays = body.split(":");
+        if (bodyArrays.length <= 0 || bodyArrays.length >2) {
+
+        }
+        String bodyValue = bodyArrays[0];
+        String mac = bodyArrays[1];
+
+        log.info(bodyArrays.length);
+        log.info(bodyValue);
+        log.info(mac);
+
+
+    }
+
+    @Test
+    public void testBase64() throws NoSuchAlgorithmException {
+//        String baseStr = "A99999:20170427164214";
+//        String md5Str = "A9999912345620170427164313";
+//
+//        log.info(com.base.common.Base64.encodeToString(baseStr));
+//
+//        log.info(MD5.md5(md5Str));
+
+
+        String base = "MTIZNDU2NZG5MDOYMDE3MDUWNDEWMZMXOA==";
+        log.info(com.base.common.Base64.decode(base));
     }
 
     @Test

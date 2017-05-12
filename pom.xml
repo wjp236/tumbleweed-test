@@ -406,6 +406,16 @@
             <artifactId>pay-sdk</artifactId>
             <version>1.0.0.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.0.15.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-transport-sctp</artifactId>
+            <version>4.0.15.Final</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
