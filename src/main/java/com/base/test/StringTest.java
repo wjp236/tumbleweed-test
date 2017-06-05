@@ -23,6 +23,13 @@ public class StringTest {
     public Logger log = LogManager.getLogger(StringTest.class);
 
     @Test
+    public void test8() throws NoSuchAlgorithmException {
+        String t1 = "1234567890";
+        log.info(t1.substring(0, 6));
+
+    }
+
+    @Test
     public void test4() throws NoSuchAlgorithmException {
         String sig = "_";
         sig = MD5.md5(sig);
