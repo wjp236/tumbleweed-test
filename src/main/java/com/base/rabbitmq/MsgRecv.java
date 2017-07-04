@@ -11,9 +11,9 @@ import java.util.Map;
  */
 public class MsgRecv {
 
+    private final static String QUEUE_NAME = "test_queue_20170703";
     private final static String XCHG_NAME = "xchg_20161029";
 
-    private final static String QUEUE_NAME = "generalConfig_exchange_fanout";
     private final static String USER_PASS = "rabbitadmin";
     private final static String HOST = "172.16.254.224";
     private final static int POST = 5672;

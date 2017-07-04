@@ -23,10 +23,32 @@ public class StringTest {
     public Logger log = LogManager.getLogger(StringTest.class);
 
     @Test
+    public void test10() {
+        String test = String.format("%1$03d", 7);
+        System.out.println(test);
+    }
+
+    @Test
+    public void test9() {
+        String s1 = "000000000001";
+
+        String ss1 = s1.substring(0, 10);
+        String ss2 = s1.substring(10);
+
+        log.info("ss1:{} ss2:{}", ss1, ss2);
+
+        String ss3 = ss1 + "." + ss2;
+
+        double ss4 = Double.parseDouble(ss3);
+
+        log.info(ss4);
+
+    }
+
+    @Test
     public void test8() throws NoSuchAlgorithmException {
         String t1 = "1234567890";
         log.info(t1.substring(0, 6));
-
     }
 
     @Test

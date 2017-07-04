@@ -6,6 +6,7 @@ import com.base.common.MD5;
 import com.base.common.MD5SignAndValidate;
 import com.base.model.Model;
 import com.base.util.FastJsonUtils;
+import com.google.gson.Gson;
 import com.yuntongxun.model.CCPAccount;
 import com.yuntongxun.model.PushMessage;
 import com.yuntongxun.model.Response;
@@ -373,4 +374,24 @@ public class JsonTest {
         }
 
     }
+
+    @Test
+    public void listJsonTest() {
+
+        List<Model> modelList = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            Model model = new Model();
+            model.setKey("k" + i);
+            model.setValue("v" + i);
+            modelList.add(model);
+        }
+
+        Map<String, String> resMap = new HashMap<>();
+        resMap.put("ret_code", "000000");
+        resMap.put("ret_msg", "success");
+        resMap.put("refundDetail", new Gson().toJson(modelList));
+
+        log.info(new Gson().toJson(resMap));
+    }
+
 }

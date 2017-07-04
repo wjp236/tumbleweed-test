@@ -13,13 +13,14 @@ import java.util.concurrent.TimeoutException;
  */
 public class MsgSend {
 
-    private final static String QUEUE_NAME = "test_queue_20161029";
+    private final static String QUEUE_NAME = "test_queue_20170703";
+    public static String XCHG_NAME = "generalConfig_exchange_fanout";
+
     private final static String USER_PASS = "rabbitadmin";
     private final static String HOST = "172.16.254.224";
     private final static int POST = 5672;
 
     private static Scanner scanner = new Scanner(System.in);
-    public static String XCHG_NAME = "generalConfig_exchange_fanout";
 
     private static String message = "";
 
@@ -69,9 +70,15 @@ public class MsgSend {
                     //参数4：消息体
                     //RabbitMQ默认有一个exchange，叫default exchange，它用一个空字符串表示，它是direct exchange类型，
                     //任何发往这个exchange的消息都会被路由到routing key的名字对应的队列上，如果没有对应的队列，则消息会被丢弃
+                    channel.confirmSelect();
+
                     channel.basicPublish("", QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes()); //设置消息为持久化，服务器重启不会丢失
 
                     System.out.println("Send " + message);
+
+                    if (channel.waitForConfirms()) {
+                        System.out.println("发送成功");
+                    }
                 }
                 break;
             case FANOUT:
