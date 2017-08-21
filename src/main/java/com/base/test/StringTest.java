@@ -23,6 +23,14 @@ public class StringTest {
     public Logger log = LogManager.getLogger(StringTest.class);
 
     @Test
+    public void test11() {
+        String t1 = "test123";
+        String t2 = "test123";
+
+        System.out.println(t1.equals(t2));
+    }
+
+    @Test
     public void test10() {
         String test = String.format("%1$03d", 7);
         System.out.println(test);
