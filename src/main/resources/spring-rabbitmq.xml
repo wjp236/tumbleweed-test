@@ -15,7 +15,7 @@
 
 	<!-- 连接配置 需要增加配置文件,rabbitmq.properties,内容为 
 		rabbitmq.host=127.0.0.1 
-		rabbitmq.username=test 
+		rabbitmq.usernhui10test
 		rabbitmq.password=123456 
 		rabbitmq.port=5672 
 		-->

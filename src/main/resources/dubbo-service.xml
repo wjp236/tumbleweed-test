@@ -12,6 +12,6 @@
 
     <dubbo:protocol name="hessian" port="28080" server="servlet"/>
 
-    <dubbo:service protocol="hessian" interface="com.base.dubbo.TestDubbo" ref="testDubbo" version="1.0"/>
+    <dubbo:service protocol="hessian" interface="com.tumbleweed.test.base.dubbo.TestDubbo" ref="testDubbo" version="1.0"/>
 
 </beans>

@@ -9,6 +9,6 @@
     <dubbo:application name="test-client" />
     <dubbo:registry address="zookeeper://10.4.89.152:2181"/>
     <!--<dubbo:protocol name="hessian" port="28080"  contextpath="testinfo" server="servlet" />-->
-    <dubbo:reference id="testDubbo" interface="com.base.dubbo.TestDubbo"/>
+    <dubbo:reference id="testDubbo" interface="com.tumbleweed.test.base.dubbo.TestDubbo"/>
 
 </beans>
