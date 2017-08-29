@@ -1,4 +1,4 @@
-package com.base.arithmetic;
+package test.base.arithmetic;
 
 import org.junit.Test;
 
@@ -66,6 +66,39 @@ public class Test1 {
         System.out.println();
     }
 
+    @Test
+    public void test4() {
+
+        int[] nList = new int[500];
+        int m = 50;
+
+        nList[nList.length - 1] = 1;
+
+        for (int j = 1; j <= m; j++) {
+            nList = this.multiplication(nList, j);
+        }
+
+
+        int[] mList = new int[500];
+        int n = 50;
+
+        mList[mList.length - 1] = 1;
+
+        for (int j = 1; j <= n; j++) {
+            mList = this.multiplication(mList, j);
+        }
+
+
+        int[] zList = multiplication2(nList, mList);
+
+
+        for (int i = 0; i < zList.length; i++) {
+            System.out.print(zList[i]);
+        }
+        System.out.println();
+
+    }
+
 
     public static int[] multiplication(int[] nList, int num) {
         for (int i = 0; i < nList.length; i++) {
@@ -78,6 +111,16 @@ public class Test1 {
         }
         return nList;
     }
+
+    public static int[] multiplication2(int[] nList, int[] mList) {
+        for (int i = 0; i < mList.length; i++) {
+            int t = mList[mList.length - 1 - i];
+            nList = multiplication(nList, t);
+        }
+        return nList;
+    }
+
+
 
 
 
