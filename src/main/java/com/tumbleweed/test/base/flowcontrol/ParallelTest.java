@@ -22,7 +22,6 @@ public class ParallelTest {
 
     private static void handler() {
         boolean acquire = acquire();
-
         try {
             if (acquire) {
                 System.out.println("业务执行中");

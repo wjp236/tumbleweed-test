@@ -1,0 +1,106 @@
+server:
+  port: 8082
+spring.jackson:
+  date-format: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+  joda-date-time-format: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+  serialization.write_dates_as_timestamps: false
+  time-zone: GMT+8
+#持久层和数据库配置
+spring:
+  profiles.active: development.env
+  jpa:
+    properties.jadira.usertype.autoRegisterUserTypes: true
+    hibernate:
+      naming.strategy: org.hibernate.cfg.ImprovedNamingStrategy
+  datasource:
+    driverClassName: com.p6spy.engine.spy.P6SpyDriver
+    tomcat:
+          max-wait: 10000
+          max-active: 50
+          initial-size: 32
+          max-idle: 40
+          min-idle: 1
+          test-while-idle: true
+          test-on-borrow: true
+          validation-query: SELECT 1
+          time-between-eviction-runs-millis: 300000
+          min-evictable-idle-time-millis: 1800000
+#log
+logging:
+  config: classpath:log4j2.xml
+online:
+  path: http://10.20.9.85:9881
+rest:
+  read.timeout: 10000
+  connect.timeout: 15000
+---
+spring:
+  profiles: development.env
+  jpa:
+    database: mysql
+    generate-ddl: true
+    hibernate.ddl-auto: update
+    show-sql: false
+  datasource:
+    url: jdbc:p6spy:mysql://10.20.2.97:3306/ticket?useSSL=false&useUnicode=true&characterEncoding=UTF-8&amp;autoReconnect=true&amp;rewriteBatchedStatements=true&amp;allowMultiQueries=true
+    username: ticket
+    password: ticket
+    platform: mysql
+#keycloak配置
+keycloak:
+  auth-server-url: https://keycloak.zgc.etongdai.org/auth
+  credentials.secret: ff870b9b-7b4c-4f3f-b316-c71571c2f7df
+  ssl-required: external
+  realm: common-service
+  bearer-only: true
+  resource: ticket
+  use-resource-role-mappings: true
+
+security:
+  swagger.ignore: false
+---
+spring:
+  profiles: staging.env
+  jpa:
+    database: mysql
+    generate-ddl: true
+    hibernate.ddl-auto: update
+    show-sql: true
+  datasource:
+    url: jdbc:p6spy:mysql://10.20.9.58:3306/tickets?useSSL=false&useUnicode=true&characterEncoding=UTF-8&amp;autoReconnect=true&amp;rewriteBatchedStatements=true&amp;allowMultiQueries=true
+    username: tickets
+    password: tickets
+    platform: mysql
+#keycloak配置
+keycloak:
+  auth-server-url: https://keycloak.zgc.etongdai.org/auth
+  credentials.secret: ff870b9b-7b4c-4f3f-b316-c71571c2f7df
+  ssl-required: external
+  realm: common-service
+  bearer-only: true
+  resource: ticket
+  use-resource-role-mappings: true
+security.swagger.ignore: true
+---
+spring:
+  profiles: preproduction.env
+  jpa:
+    database: mysql
+    generate-ddl: true
+    hibernate.ddl-auto: update
+    show-sql: true
+  datasource:
+    url: jdbc:p6spy:mysql://10.20.2.97:3306/ticket?useSSL=false&useUnicode=true&characterEncoding=UTF-8&amp;autoReconnect=true&amp;rewriteBatchedStatements=true&amp;allowMultiQueries=true
+    username: ticket
+    password: ticket
+    platform: mysql
+#keycloak配置
+keycloak:
+  auth-server-url: https://keycloak.etongdai.org/auth
+  credentials.secret: cd888a74-225a-4123-98dd-dff8986f0f21
+  ssl-required: external
+  realm: common-service
+  bearer-only: true
+  resource: ticket
+  use-resource-role-mappings: true
+security.swagger.ignore: false
