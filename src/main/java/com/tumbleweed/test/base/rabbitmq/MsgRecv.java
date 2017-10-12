@@ -121,6 +121,7 @@ public class MsgRecv {
                 }
             default: {
                 while (true) {
+                    System.out.println("id:" + Thread.currentThread().getId());
                     QueueingConsumer.Delivery delivery = consumer.nextDelivery();
                     System.out.println("Received " + new String(delivery.getBody()));
 
