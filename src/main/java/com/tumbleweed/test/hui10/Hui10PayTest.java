@@ -87,6 +87,43 @@ public class Hui10PayTest {
 
     }
 
+
+    /**
+     * 查询分润
+     */
+    @Test
+    public void queryProfitTotal() throws IOException, NoSuchAlgorithmException, InterruptedException {
+
+        HashMap<String, String> tradeParamMap = new HashMap<String, String>();
+        tradeParamMap.put("merc_id", "8011056811254598983686");
+        tradeParamMap.put("salt", "123456");
+        tradeParamMap.put("req_time", DateUtils.getCurrentDateTime());
+        tradeParamMap.put("month", "201709");
+        tradeParamMap.put("profit_type", "UPL");
+        tradeParamMap.put("startRow", "0");
+        tradeParamMap.put("endRow", "100");
+
+        Map<String, String> tradeParamMapWithSign = MD5SignAndValidate.signData(tradeParamMap, "123456");
+
+        String body = new Gson().toJson(tradeParamMapWithSign);
+
+        log.info("body:\n" + body);
+
+        String appId = "A99999";
+
+        String token = "123456";
+
+        String url = devServerUrl + "/" + appId + "/statistic/queryProfitTotal";
+
+//        String url = "http://localhost:8080" + "/" + appId + "/pay/xinyipay/callBack";
+
+        log.info(url);
+
+        HttpPostUtil.sendJSON(appId, token, url, body);
+
+    }
+
+
     @Test
     public void signData() throws IOException, NoSuchAlgorithmException {
         String body = "{\n" +
