@@ -1,4 +1,4 @@
-package com.tumbleweed.test.base.proxy.dynamic;
+package com.tumbleweed.test.base.proxy.jdk;
 
 
 /**

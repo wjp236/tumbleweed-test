@@ -1,4 +1,4 @@
-package com.tumbleweed.test.base.proxy.dynamic.MyProxy;
+package com.tumbleweed.test.base.proxy.jdk.MyProxy;
 
 import java.lang.reflect.Method;
 

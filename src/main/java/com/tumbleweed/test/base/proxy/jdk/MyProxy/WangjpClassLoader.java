@@ -1,4 +1,4 @@
-package com.tumbleweed.test.base.proxy.dynamic.MyProxy;
+package com.tumbleweed.test.base.proxy.jdk.MyProxy;
 
 import java.io.*;
 
@@ -30,7 +30,7 @@ public class WangjpClassLoader extends ClassLoader {
                     while ((len = inputStream.read(buffer)) != -1) {
                         byteArrayOutputStream.write(buffer, 0, len);
                     }
-                    return defineClass("com.tumbleweel.hui10.base.proxy.dynamic.myProxy." + name,
+                    return defineClass("com.tumbleweed.test.base.proxy.jdk.MyProxy." + name,
                             byteArrayOutputStream.toByteArray(), 0, byteArrayOutputStream.size());
 
                 } catch (FileNotFoundException e) {

@@ -1,7 +1,7 @@
-package com.tumbleweed.test.base.proxy.dynamic;
+package com.tumbleweed.test.base.proxy.jdk;
 
-import com.tumbleweed.test.base.proxy.dynamic.MyProxy.WangjpProxy;
-import com.tumbleweed.test.base.proxy.dynamic.MyProxy.WangjpProxyHandler;
+import com.tumbleweed.test.base.proxy.jdk.MyProxy.WangjpProxy;
+import com.tumbleweed.test.base.proxy.jdk.MyProxy.WangjpProxyHandler;
 import sun.misc.ProxyGenerator;
 
 import java.io.FileNotFoundException;

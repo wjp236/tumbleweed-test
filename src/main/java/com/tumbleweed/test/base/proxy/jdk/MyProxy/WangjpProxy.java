@@ -1,4 +1,4 @@
-package com.tumbleweed.test.base.proxy.dynamic.MyProxy;
+package com.tumbleweed.test.base.proxy.jdk.MyProxy;
 
 import javax.tools.JavaCompiler;
 import javax.tools.StandardJavaFileManager;
@@ -25,7 +25,7 @@ public class WangjpProxy {
             Method[] methods = clazz.getMethods();
 
             //创建一个java文件,用流创建一个java文件
-            StringBuffer proxyClass = new StringBuffer("package com.tumbleweel.hui10.base.proxy.dynamic.myProxy;").append(rt);
+            StringBuffer proxyClass = new StringBuffer("package com.tumbleweed.test.base.proxy.jdk.MyProxy;").append(rt);
             proxyClass.append("import java.lang.reflect.Method;").append(rt);
             //定义类名
             proxyClass.append("public class $WjpProxy implements ").append(clazz.getName()).append("{").append(rt);
@@ -39,7 +39,7 @@ public class WangjpProxy {
             proxyClass.append("}");
 
             //生成文件
-            String fileName = "/Users/mylover/git/tumbleweed-hui10/src/main/java/com/base/proxy/dynamic/myProxy/$WjpProxy.java";
+            String fileName = "/Users/mylover/git/tumbleweed/tumbleweed-test/src/main/java/com/tumbleweed/test/base/proxy/jdk/MyProxy/$WjpProxy.java";
             File file = new File(fileName);
 
             FileWriter fileWriter = new FileWriter(file);
@@ -56,10 +56,10 @@ public class WangjpProxy {
             sjfm.close();
 
             //把编译的文件加载到内存中
-            WangjpClassLoader loader = new WangjpClassLoader("/Users/mylover/git/tumbleweed-hui10/src/main/java/com/base/proxy/dynamic/myProxy/");
+            WangjpClassLoader loader = new WangjpClassLoader("/Users/mylover/git/tumbleweed/tumbleweed-test/src/main/java/com/tumbleweed/test/base/proxy/jdk/MyProxy/");
             Class wjpProxy = loader.findClass("$WjpProxy");
 
-            File classFile = new File("/Users/mylover/git/tumbleweed-hui10/src/main/java/com/base/proxy/dynamic/myProxy/$WjpProxy.class");
+            File classFile = new File("/Users/mylover/git/tumbleweed/tumbleweed-test/src/main/java/com/tumbleweed/test/base/proxy/jdk/MyProxy/$WjpProxy.class");
             if (classFile.exists() && file.exists()) {
                 Thread.sleep(10000);
                 file.delete();
