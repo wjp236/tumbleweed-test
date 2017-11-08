@@ -185,6 +185,10 @@
                     <artifactId>sojo-optional</artifactId>
                     <groupId>net.sf.sojo</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>cglib-full</artifactId>
+                    <groupId>cglib</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <!-- Spring -->
@@ -434,6 +438,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.16</version>
+        </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.2.5</version>
         </dependency>
     </dependencies>
     <build>
