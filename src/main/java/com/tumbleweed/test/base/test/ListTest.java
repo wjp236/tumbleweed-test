@@ -7,9 +7,9 @@ import org.junit.Test;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Vector;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -33,7 +33,7 @@ public class ListTest {
     public void testList() {
         List<String> list = null;
 
-        String str = StringUtils.join(list,"#");
+        String str = StringUtils.join((Iterator) list,"#");
 
         log.info(str);
     }
@@ -50,7 +50,6 @@ public class ListTest {
 
     @Test
     public void test2() {
-        List<String> test = new Vector<String>();
 
     }
 }
