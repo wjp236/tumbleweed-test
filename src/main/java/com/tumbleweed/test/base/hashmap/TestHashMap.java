@@ -40,4 +40,19 @@ public class TestHashMap {
         System.out.println(t1.hashCode());
     }
 
+
+
+    @Test
+    public void test1() {
+        String value = "我是中国人";
+        char[] chars = value.toCharArray();
+
+        CharColumn<String>[] columns = new CharColumn[0];
+
+        for (int i = 0; i < chars.length; i++) {
+            char c = chars[i];
+            System.out.println("---------:" + c);
+        }
+    }
+
 }

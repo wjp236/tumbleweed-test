@@ -10,22 +10,12 @@ import java.io.IOException;
 import java.lang.reflect.Proxy;
 
 /**
- * 描述: hui10 class
+ * 描述: class
  *
  * @author: mylover
  * @Time: 13/02/2017.
  */
 public class Test {
-
-    @org.junit.Test
-    public void testWangDynamic() throws Throwable {
-        People people = (People) WangjpProxy.createProxyInstance(
-                People.class.getClassLoader(), People.class, new WangjpProxyHandler(new Wangjp()));
-
-        people.eat();
-
-        System.out.println(people.getClass().getName());
-    }
 
     @org.junit.Test
     public void testDynamic() throws Throwable {
@@ -54,6 +44,16 @@ public class Test {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @org.junit.Test
+    public void testWangDynamic() throws Throwable {
+        People people = (People) WangjpProxy.createProxyInstance(
+                People.class.getClassLoader(), People.class, new WangjpProxyHandler(new Wangjp()));
+
+        people.eat();
+
+        System.out.println(people.getClass().getName());
     }
 
 }

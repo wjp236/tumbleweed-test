@@ -5,7 +5,9 @@ import com.tumbleweed.test.base.proxy.jdk.People;
 import java.lang.reflect.Method;
 
 /**
- * 描述:
+ * 描述:代理执行类
+ *
+ *  通过反射调用方法
  *
  * @author: mylover
  * @Time: 15/02/2017.
