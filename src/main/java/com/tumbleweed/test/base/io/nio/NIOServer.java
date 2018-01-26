@@ -117,7 +117,6 @@ public class NIOServer {
 
     public static void main(String[] args) throws IOException {
         new NIOServer(9999).listener();
-
     }
 
 }
